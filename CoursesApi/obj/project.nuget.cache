@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cmS8gU4WPKylez9R+RdjxfnvQkZ8ftinMQ9SIBLaA/r9NmxnRU7f1H7UCZePWOKlGHFaq+5K4X92smC1q9YtaQ==",
+  "dgSpecHash": "GWpxp1R08Gn9URK9XZIfXb28mawcNlCZXvoyaSHKyeUTV8FmpzT4Y/o8e8xtuCC7sSWBL4AR8Dcn1Ba+h/j9rQ==",
   "success": true,
-  "projectFilePath": "D:\\Repos\\Web\\Westcoast-Education\\CoursesApi\\CoursesApi.csproj",
+  "projectFilePath": "D:\\Repos\\Web\\Simply-Education\\CoursesApi\\CoursesApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jlein\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\jlein\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

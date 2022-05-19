@@ -12,6 +12,8 @@ namespace CoursesApi.Data
     {
         public DbSet<Course> Courses => Set<Course>();
         public DbSet<Category> Categories => Set<Category>();
+        public DbSet<StudentCourse> StudentCourses => Set<StudentCourse>();
+        // public DbSet<StudentCourse> StudentCourses => Set<StudentCourse>();
         public CoursesContext(DbContextOptions options) : base(options)
         {
 
