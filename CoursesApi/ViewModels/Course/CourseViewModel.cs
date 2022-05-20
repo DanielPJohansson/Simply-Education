@@ -8,9 +8,9 @@ namespace CoursesApi.ViewModels.Course
     public class CourseViewModel
     {
         public int CourseId { get; set; }
-        public int CourseNo { get; set; }
+        public int CourseCode { get; set; }
         public string? Name { get; set; }
-        public int Length { get; set; }
+        public int Duration { get; set; }
         public string? Category { get; set; }
         public string? Description { get; set; }
 

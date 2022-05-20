@@ -3,6 +3,7 @@ using System;
 using CoursesApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoursesApi.Data.migrations
 {
     [DbContext(typeof(CoursesContext))]
-    partial class CoursesContextModelSnapshot : ModelSnapshot
+    [Migration("20220520062907_Extended model and user")]
+    partial class Extendedmodelanduser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
@@ -141,7 +143,7 @@ namespace CoursesApi.Data.migrations
                     b.Property<int>("Duration")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("IsDeprecated")
+                    b.Property<bool>("IsReprecated")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
@@ -165,7 +167,7 @@ namespace CoursesApi.Data.migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Students");
+                    b.ToTable("Student");
                 });
 
             modelBuilder.Entity("CoursesApi.Models.StudentCourse", b =>
@@ -203,7 +205,7 @@ namespace CoursesApi.Data.migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teachers");
+                    b.ToTable("Teacher");
                 });
 
             modelBuilder.Entity("CourseTeacher", b =>

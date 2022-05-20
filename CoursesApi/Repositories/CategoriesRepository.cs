@@ -32,14 +32,13 @@ namespace CoursesApi.Repositories
             var courses = await _context.Categories.Where(cat => cat.Id == id).Include(cat => cat.Courses).Select(cat => new CategoryWithCoursesViewModel
             {
                 CategoryId = cat.Id,
-                Name = cat.Name,
-                Courses = cat.Courses!.Select(c => new CourseViewModel
+                CategoryName = cat.Name,
+                Courses = cat.Courses.Select(c => new CourseViewModel
                 {
                     CourseId = c.Id,
-                    CourseNo = c.CourseNo,
+                    CourseCode = c.CourseCode,
                     Name = c.Name,
-                    Length = c.Length,
-                    Category = cat.Name,
+                    Duration = c.Duration,
                     Description = c.Description,
                     Details = c.Details
                 }).ToList()
@@ -59,14 +58,14 @@ namespace CoursesApi.Repositories
 
         public async Task AddCategoryAsync(PostCategoryViewModel model)
         {
-            if (await _context.Categories.AnyAsync(cat => cat.Name == model.Name))
+            if (await _context.Categories.AnyAsync(cat => cat.Name.ToLower() == model.Name!.ToLower()))
             {
                 throw new Exception(message: $"Kategorin {model.Name} finns redan i databasen.");
             }
 
             var category = new Category
             {
-                Name = model.Name
+                Name = model.Name!
             };
 
             await _context.Categories.AddAsync(category);
@@ -81,7 +80,7 @@ namespace CoursesApi.Repositories
                 throw new Exception($"Det finns ingen kategori med id: {id}");
             }
 
-            category.Name = model.Name;
+            category.Name = model.Name!;
             _context.Categories.Update(category);
         }
 

@@ -14,10 +14,17 @@ namespace CoursesApi.Controllers
             _repository = repository;
         }
 
-        [HttpGet("{id}/list")]
+        [HttpGet("{id}/courses")]
         public async Task<ActionResult> GetCoursesInCategory(int id)
         {
-            return Ok();
+            var response = await _repository.GetCoursesInCategoryAsync(id);
+
+            if (response is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(response);
         }
 
         [HttpGet()]
@@ -52,7 +59,7 @@ namespace CoursesApi.Controllers
                     return StatusCode(201);
                 }
 
-                return StatusCode(500, "Det gick inte att spara när kategorin");
+                return StatusCode(500, "Det gick inte att spara kategorin");
             }
             catch (Exception ex)
             {
@@ -88,7 +95,7 @@ namespace CoursesApi.Controllers
                 {
                     return NoContent();
                 }
-                return StatusCode(500, $"Det gick inte att spara borttagninen av kategorin med id: {id}");
+                return StatusCode(500, $"Det gick inte att spara borttagningen av kategorin med id: {id}");
             }
             catch (Exception ex)
             {

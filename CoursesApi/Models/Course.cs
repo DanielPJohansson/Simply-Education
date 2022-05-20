@@ -10,12 +10,12 @@ namespace CoursesApi.Models
     public class Course
     {
         public int Id { get; set; }
-        public int CourseNo { get; set; }
+        public int CourseCode { get; set; }
         public string? Name { get; set; }
-        public int Length { get; set; }
+        public int Duration { get; set; }
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
-        public Category? Category { get; set; }
+        public Category Category { get; set; } = new Category();
         public string? Description { get; set; }
 
         //Potentiellt behövs formatering lagras här
@@ -23,6 +23,6 @@ namespace CoursesApi.Models
 
         public ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
         public ICollection<StudentCourse> StudentCourses { get; set; } = new List<StudentCourse>();
-        public bool IsReprecated { get; set; } = false;
+        public bool IsDeprecated { get; set; } = false;
     }
 }

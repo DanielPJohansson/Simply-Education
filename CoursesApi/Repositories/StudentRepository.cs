@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CoursesApi.ViewModels.Course
+namespace CoursesApi.Repositories
 {
-    public class PatchCourseViewModel
+    public class StudentRepository
     {
         
     }
