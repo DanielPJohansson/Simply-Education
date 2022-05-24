@@ -1,5 +1,5 @@
 using CoursesApi.Interfaces;
-using CoursesApi.ViewModels.Category;
+using CoursesApi.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoursesApi.Controllers
@@ -25,6 +25,13 @@ namespace CoursesApi.Controllers
             }
 
             return Ok(response);
+        }
+
+        [HttpGet("{id}/teachers")]
+        public async Task<ActionResult> GetTeachersInCategory(int id)
+        {
+
+            return Ok();
         }
 
         [HttpGet()]

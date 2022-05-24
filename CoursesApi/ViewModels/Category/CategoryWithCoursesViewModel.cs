@@ -1,10 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CoursesApi.ViewModels.Course;
-
-namespace CoursesApi.ViewModels.Category
+namespace CoursesApi.ViewModels
 {
     public class CategoryWithCoursesViewModel
     {

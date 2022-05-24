@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CoursesApi.Models;
 
-namespace CoursesApi.ViewModels.Course
+namespace CoursesApi.ViewModels
 {
     public class PostCourseViewModel
     {

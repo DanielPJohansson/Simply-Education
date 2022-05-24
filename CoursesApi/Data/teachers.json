@@ -1,0 +1,72 @@
+[
+    {
+        "FirstName": "Daniel",
+        "LastName":"Svensson",
+        "Address":"Gatan 15, 50500 Göteborg",
+        "Email": "daniel@teacher.se",
+        "Competences": [
+            ".NET",
+            "JavaScript"
+        ]
+    },
+    {
+        "FirstName": "Eva",
+        "LastName":"Petersson",
+        "Address":"Vägen 31, 50500 Göteborg",
+        "Email": "eva@teacher.se",
+        "Competences": [
+            ".NET",
+           "JavaScript"
+        ]
+    },
+    {
+        "FirstName": "Alfons",
+        "LastName":"Åberg",
+        "Address":"Hörnet 3, 50500 Göteborg",
+        "Email": "alfons@teacher.se",
+        "Competences": [
+            "HTML",
+            "CSS",
+            "JavaScript"
+        ]
+    },
+    {
+        "FirstName": "Eli",
+        "LastName":"Jonsson",
+        "Address":"Kullen 112, 50500 Göteborg",
+        "Email": "eli@teacher.se",
+        "Competences": [
+            "C++",
+            "Machine learning"
+        ]
+    },
+    {
+        "FirstName": "Lina",
+        "LastName":"Nilsson",
+        "Address":"Gatan 5, 50500 Göteborg",
+        "Email": "lina@teacher.se",
+        "Competences": [
+            "Python",
+           "Machine learning"
+        ]
+    },
+    {
+        "FirstName": "Albert",
+        "LastName":"Berg",
+        "Address":"Vägen 6, 50500 Göteborg",
+        "Email": "albert@teacher.se",
+        "Competences": [
+            "JavaScript",
+            "React"
+        ]
+    },
+    {
+        "FirstName": "Asser",
+        "LastName":"Malik",
+        "Address":"Kullen 1, 50500 Göteborg",
+        "Email": "asser@teacher.se",
+        "Competences": [
+           "C++"
+        ]
+    }
+]

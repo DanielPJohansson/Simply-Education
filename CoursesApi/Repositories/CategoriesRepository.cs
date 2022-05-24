@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 using CoursesApi.Data;
 using CoursesApi.Interfaces;
 using CoursesApi.Models;
-using CoursesApi.ViewModels.Category;
-using CoursesApi.ViewModels.Course;
+using CoursesApi.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoursesApi.Repositories

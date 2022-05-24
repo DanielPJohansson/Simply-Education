@@ -13,11 +13,35 @@ namespace CoursesApi.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetTeacher(int id)
         {
-            return View();
+            return Ok();
         }
 
+        [HttpGet]
+        public async Task<ActionResult> GetTeachers()
+        {
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddTeacher()
+        {
+            return StatusCode(201);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateTeacher()
+        {
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult> DeleteTeacher()
+        {
+            return NoContent();
+        }
 
     }
 }

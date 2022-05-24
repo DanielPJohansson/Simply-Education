@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CoursesApi.Interfaces;
-using CoursesApi.ViewModels.Course;
+using CoursesApi.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoursesApi.Controllers
@@ -50,7 +50,7 @@ namespace CoursesApi.Controllers
             return StatusCode(201);
         }
 
-        [HttpDelete("{id}/students/{studentId}}")]
+        [HttpDelete("{id}/students/{studentId}")]
         public async Task<ActionResult> RemoveStudentFromCourse(int id, int studentId)
         {
             return NoContent();

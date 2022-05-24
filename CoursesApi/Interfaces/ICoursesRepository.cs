@@ -1,4 +1,4 @@
-using CoursesApi.ViewModels.Course;
+using CoursesApi.ViewModels;
 
 namespace CoursesApi.Interfaces
 {

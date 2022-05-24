@@ -31,5 +31,16 @@ namespace CoursesApi.Controllers
             return StatusCode(201);
         }
 
+        [HttpPut]
+        public async Task<ActionResult> UpdateStudent()
+        {
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult> DeleteStudent()
+        {
+            return NoContent();
+        }
     }
 }
