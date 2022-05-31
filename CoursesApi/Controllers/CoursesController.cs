@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CoursesApi.Interfaces;
-using CoursesApi.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoursesApi.Controllers
@@ -17,10 +11,9 @@ namespace CoursesApi.Controllers
         public CoursesController(ICoursesRepository repository)
         {
             _repository = repository;
-
         }
 
-        [HttpGet()]
+        [HttpGet("list")]
         public async Task<ActionResult> GetCourses()
         {
             var response = await _repository.GetCoursesAsync();
@@ -33,27 +26,56 @@ namespace CoursesApi.Controllers
             var response = await _repository.GetCourseAsync(id);
             if (response is null)
             {
-                return NotFound($"Det finns ingen kurs med id: {id}");
+                return NotFound($"Could not find course with Id: {id}");
             }
             return Ok(response);
         }
 
-        [HttpGet("{id}/students")]
-        public async Task<ActionResult> GetCourseWithStudents(int id)
+        [HttpGet("{id}/list")]
+        public async Task<ActionResult> GetCourseWithStudentsAndTeachers(int id)
         {
-            return Ok();
+            var response = await _repository.GetCourseWithStudentsAndTeachersAsync(id);
+            if (response is null)
+            {
+                return NotFound($"Could not find course with Id: {id}");
+            }
+            return Ok(response);
         }
 
         [HttpPost("{id}/students")]
-        public async Task<ActionResult> AddStudentToCourse(int id)
+        public async Task<ActionResult> AddStudentToCourse(PostStudentCourseViewModel model)
         {
-            return StatusCode(201);
+            try
+            {
+                await _repository.AddStudentToCourseAsync(model);
+                if (await _repository.SaveChangesAsync())
+                {
+                    return StatusCode(201);
+                }
+                return StatusCode(500, "The changes could not be saved.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
-        [HttpDelete("{id}/students/{studentId}")]
-        public async Task<ActionResult> RemoveStudentFromCourse(int id, int studentId)
+        [HttpPost("{id}/teachers")]
+        public async Task<ActionResult> AddTeacherToCourse(PostTeacherToCourseViewModel model)
         {
-            return NoContent();
+            try
+            {
+                await _repository.AddTeacherToCourseAsync(model);
+                if (await _repository.SaveChangesAsync())
+                {
+                    return StatusCode(201);
+                }
+                return StatusCode(500, "The changes could not be saved.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpPost()]
@@ -66,7 +88,7 @@ namespace CoursesApi.Controllers
                 {
                     return StatusCode(201);
                 }
-                return StatusCode(500, "Det gick inte att spara den tillagda kursen.");
+                return StatusCode(500, "The course could not be saved.");
             }
             catch (Exception ex)
             {
@@ -74,7 +96,7 @@ namespace CoursesApi.Controllers
             }
         }
 
-        [HttpPatch("{id}")]
+        [HttpPut("{id}")]
         public async Task<ActionResult> UpdateCourse(int id, PostCourseViewModel model)
         {
             try
@@ -84,7 +106,7 @@ namespace CoursesApi.Controllers
                 {
                     return NoContent();
                 }
-                return StatusCode(500, "Det gick inte att spara ändringarna.");
+                return StatusCode(500, "The changes could not be saved.");
             }
             catch (Exception ex)
             {
@@ -102,7 +124,43 @@ namespace CoursesApi.Controllers
                 {
                     return NoContent();
                 }
-                return StatusCode(500, "Det gick inte att spara ändringarna.");
+                return StatusCode(500, "The changes could not be saved.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpDelete("{id}/teachers/{teacherId}")]
+        public async Task<ActionResult> RemoveTeacherFromCourse(int id, int teacherId)
+        {
+            try
+            {
+                await _repository.RemoveTeacherFromCourseAsync(id, teacherId);
+                if (await _repository.SaveChangesAsync())
+                {
+                    return NoContent();
+                }
+                return StatusCode(500, "The changes could not be saved.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpDelete("{id}/students/{studentId}")]
+        public async Task<ActionResult> RemoveStudentFromCourse(int id, int studentId)
+        {
+            try
+            {
+                await _repository.RemoveStudentFromCourseAsync(id, studentId);
+                if (await _repository.SaveChangesAsync())
+                {
+                    return NoContent();
+                }
+                return StatusCode(500, "The changes could not be saved.");
             }
             catch (Exception ex)
             {

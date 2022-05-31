@@ -1,12 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CoursesApi.Data;
-using CoursesApi.Interfaces;
 using CoursesApi.Models;
-using CoursesApi.ViewModels;
-using Microsoft.EntityFrameworkCore;
 
 namespace CoursesApi.Repositories
 {
@@ -37,9 +30,27 @@ namespace CoursesApi.Repositories
                     CourseId = c.Id,
                     CourseCode = c.CourseCode,
                     Name = c.Name,
-                    Duration = c.Duration,
+                    DurationInHours = c.DurationInHours,
                     Description = c.Description,
                     Details = c.Details
+                }).ToList()
+            }).SingleOrDefaultAsync();
+            return courses;
+        }
+
+        public async Task<CategoryWithTeachersViewModel?> GetTeachersInCategoryAsync(int id)
+        {
+            var courses = await _context.Categories.Where(cat => cat.Id == id).Include(cat => cat.Courses).Select(cat => new CategoryWithTeachersViewModel
+            {
+                CategoryId = cat.Id,
+                CategoryName = cat.Name,
+                Teachers = cat.Teachers.Select(t => new TeacherViewModel
+                {
+                    Id = t.Id,
+                    FirstName = t.FirstName,
+                    LastName = t.LastName,
+                    Address = t.Address,
+                    Email = t.Email
                 }).ToList()
             }).SingleOrDefaultAsync();
             return courses;

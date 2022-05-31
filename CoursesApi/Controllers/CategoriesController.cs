@@ -1,5 +1,3 @@
-using CoursesApi.Interfaces;
-using CoursesApi.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoursesApi.Controllers
@@ -30,8 +28,14 @@ namespace CoursesApi.Controllers
         [HttpGet("{id}/teachers")]
         public async Task<ActionResult> GetTeachersInCategory(int id)
         {
+            var response = await _repository.GetTeachersInCategoryAsync(id);
 
-            return Ok();
+            if (response is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(response);
         }
 
         [HttpGet()]
@@ -48,7 +52,7 @@ namespace CoursesApi.Controllers
 
             if (response is null)
             {
-                return NotFound($"Det finns inget objekt med id: {id}");
+                return NotFound($"Could not find category with Id: {id}");
             }
 
             return Ok(response);
@@ -66,7 +70,7 @@ namespace CoursesApi.Controllers
                     return StatusCode(201);
                 }
 
-                return StatusCode(500, "Det gick inte att spara kategorin");
+                return StatusCode(500, "Could not save changes to the database.");
             }
             catch (Exception ex)
             {
@@ -84,7 +88,7 @@ namespace CoursesApi.Controllers
                 {
                     return NoContent();
                 }
-                return StatusCode(500, $"Det gick inte att spara uppdateringen av kategorin till: {id}, {model.Name}");
+                return StatusCode(500, $"Could not save changes to the category: {id}, {model.Name}");
             }
             catch (Exception ex)
             {
@@ -102,11 +106,11 @@ namespace CoursesApi.Controllers
                 {
                     return NoContent();
                 }
-                return StatusCode(500, $"Det gick inte att spara borttagningen av kategorin med id: {id}");
+                return StatusCode(500, $"Could not save the removal of category: {id}");
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex);
+                return StatusCode(500, ex.Message);
             }
         }
     }

@@ -1,6 +1,6 @@
 namespace CoursesApi.ViewModels
 {
-    public class PostTeacherViewModel
+    public class PostStudentViewModel
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
@@ -9,6 +9,5 @@ namespace CoursesApi.ViewModels
         public string? City { get; set; }
         public string? Email { get; set; }
         public int PhoneNumber { get; set; }
-        public List<string> Competences { get; set; } = new List<string>();
     }
 }

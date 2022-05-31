@@ -2,13 +2,19 @@
     {
         "FirstName": "Daniel",
         "LastName":"Johansson",
-        "Address":"Gatan 1, 50500 Göteborg",
+        "Address":
+        {"Street":"Gatan 1",
+            "ZipCode":"50500",
+            "City": "Göteborg"},
         "Email": "daniel@mail.se"
     },
     {
         "FirstName": "Elsa",
         "LastName":"Petersson",
-        "Address":"Vägen 3, 50500 Göteborg",
+        "Address":
+        {"Street":"Vägen 3",
+            "ZipCode":"50500",
+            "City": "Göteborg"},
         "Email": "elsa@mail.se"
     },
     {

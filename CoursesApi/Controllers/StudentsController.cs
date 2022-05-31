@@ -6,41 +6,87 @@ namespace CoursesApi.Controllers
     [Route("api/v1/students")]
     public class StudentsController : Controller
     {
-        private readonly ILogger<StudentsController> _logger;
+        private readonly IStudentsRepository _repository;
 
-        public StudentsController(ILogger<StudentsController> logger)
+        public StudentsController(IStudentsRepository repository)
         {
-            _logger = logger;
+            _repository = repository;
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult> GetStudent(int id)
         {
-            return Ok();
+            var response = await _repository.GetStudentAsync(id);
+
+            if (response is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(response);
         }
 
-        [HttpGet]
+        [HttpGet("list")]
         public async Task<ActionResult> GetStudents()
         {
-            return Ok();
+            var response = await _repository.GetStudentsAsync();
+            return Ok(response);
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddStudent()
+        public async Task<ActionResult> AddStudent(PostStudentViewModel model)
         {
-            return StatusCode(201);
+            try
+            {
+                await _repository.AddStudentAsync(model);
+                if (await _repository.SaveChangesAsync())
+                {
+                    return StatusCode(201);
+                }
+
+                return StatusCode(500, "Could not save changes when adding student.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
-        [HttpPut]
-        public async Task<ActionResult> UpdateStudent()
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateStudent(int id, PostStudentViewModel model)
         {
-            return NoContent();
+            try
+            {
+                await _repository.UpdateStudentAsync(id, model);
+                if (await _repository.SaveChangesAsync())
+                {
+                    return NoContent();
+                }
+
+                return StatusCode(500, "Could not save changes when updating student.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
-        [HttpDelete]
-        public async Task<ActionResult> DeleteStudent()
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteStudent(int id)
         {
-            return NoContent();
+            try
+            {
+                await _repository.DeleteStudentAsync(id);
+                if (await _repository.SaveChangesAsync())
+                {
+                    return NoContent();
+                }
+                return StatusCode(500, "Det gick inte att spara ändringarna.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }

@@ -1,27 +1,22 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using CoursesApi.Models;
 
 namespace CoursesApi.ViewModels
 {
     public class PostCourseViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Course code is required")]
         public int CourseCode { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Course Name is required")]
         public string? Name { get; set; }
-        [Required]
-        public int Duration { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Course duration is required")]
+        public double DurationInHours { get; set; }
+        [Required(ErrorMessage = "Course category is required")]
         public string? Category { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Desription field is required")]
         public string? Description { get; set; }
 
         //Potentiellt behövs formatering lagras här
-        [Required]
+        [Required(ErrorMessage = "Details field is required")]
         public string? Details { get; set; }
     }
 }

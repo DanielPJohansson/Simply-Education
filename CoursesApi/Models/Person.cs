@@ -1,8 +1,12 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CoursesApi.Models
 {
-    public class Teacher
+    public class Person
     {
         public int Id { get; set; }
         public string? FirstName { get; set; }
@@ -11,8 +15,8 @@ namespace CoursesApi.Models
         [ForeignKey("AddressId")]
         public Address? Address { get; set; }
         public string? Email { get; set; }
-        public int PhoneNumber { get; set; }
-        public ICollection<Course> Courses { get; set; } = new List<Course>();
+        public ICollection<CourseStudent> CoursesAsStudent { get; set; } = new List<CourseStudent>();
+        public ICollection<Course> CoursesAsTeacher { get; set; } = new List<Course>();
         public ICollection<Category> Competences { get; set; } = new List<Category>();
     }
 }
