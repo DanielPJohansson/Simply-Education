@@ -13,25 +13,27 @@ namespace CoursesApi.Repositories
 
         public async Task<IEnumerable<StudentViewModel>> GetStudentsAsync()
         {
-            return await _context.Students.Select(s => new StudentViewModel
+            return await _context.Students.Include(s => s.Address).Select(s => new StudentViewModel
             {
                 Id = s.Id,
                 FirstName = s.FirstName,
                 LastName = s.LastName,
-                Address = s.Address,
-                Email = s.Email
+                Address = $"{s.Address!.Street}, {s.Address.ZipCode} {s.Address.City}",
+                Email = s.Email,
+                PhoneNumber = s.PhoneNumber
             }).ToListAsync();
         }
 
         public async Task<StudentViewModel?> GetStudentAsync(int id)
         {
-            return await _context.Students.Where(s => s.Id == id).Select(s => new StudentViewModel
+            return await _context.Students.Include(s => s.Address).Where(s => s.Id == id).Select(s => new StudentViewModel
             {
                 Id = s.Id,
                 FirstName = s.FirstName,
                 LastName = s.LastName,
-                Address = s.Address,
-                Email = s.Email
+                Address = $"{s.Address!.Street}, {s.Address.ZipCode} {s.Address.City}",
+                Email = s.Email,
+                PhoneNumber = s.PhoneNumber
             }).SingleOrDefaultAsync();
         }
 
@@ -46,8 +48,14 @@ namespace CoursesApi.Repositories
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                Address = model.Address,
-                Email = model.Email
+                Address = new Address
+                {
+                    Street = model.City,
+                    ZipCode = model.ZipCode,
+                    City = model.City
+                },
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber
             };
 
             await _context.Students.AddAsync(studentToAdd);
@@ -55,7 +63,7 @@ namespace CoursesApi.Repositories
 
         public async Task UpdateStudentAsync(int id, PostStudentViewModel model)
         {
-            var studentToUpdate = await _context.Students.SingleOrDefaultAsync(s => s.Id == id);
+            var studentToUpdate = await _context.Students.Include(s => s.Address).SingleOrDefaultAsync(s => s.Id == id);
             if (studentToUpdate is null)
             {
                 throw new Exception($"Could not find student with id: {id}");
@@ -63,8 +71,14 @@ namespace CoursesApi.Repositories
 
             studentToUpdate.FirstName = model.FirstName;
             studentToUpdate.LastName = model.LastName;
-            studentToUpdate.Address = model.Address;
+            studentToUpdate.Address = new Address
+            {
+                Street = model.City,
+                ZipCode = model.ZipCode,
+                City = model.City
+            };
             studentToUpdate.Email = model.Email;
+            studentToUpdate.PhoneNumber = model.PhoneNumber;
 
             _context.Students.Update(studentToUpdate);
         }

@@ -5,7 +5,7 @@ namespace CoursesApi.ViewModels
     public class PostCourseViewModel
     {
         [Required(ErrorMessage = "Course code is required")]
-        public int CourseCode { get; set; }
+        public string? CourseCode { get; set; }
         [Required(ErrorMessage = "Course Name is required")]
         public string? Name { get; set; }
         [Required(ErrorMessage = "Course duration is required")]

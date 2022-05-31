@@ -18,8 +18,10 @@ namespace CoursesApi.Repositories
                 Id = t.Id,
                 FirstName = t.FirstName,
                 LastName = t.LastName,
-                Address = t.Address,
-                Email = t.Email
+                Address = $"{t.Address!.Street}, {t.Address.ZipCode} {t.Address.City}",
+                Email = t.Email,
+                PhoneNumber = t.PhoneNumber,
+                Competences = t.Competences.Select(c => c.Name).ToList()
             }).ToListAsync();
         }
 
@@ -30,8 +32,9 @@ namespace CoursesApi.Repositories
                 Id = t.Id,
                 FirstName = t.FirstName,
                 LastName = t.LastName,
-                Address = t.Address,
+                Address = $"{t.Address!.Street}, {t.Address.ZipCode} {t.Address.City}",
                 Email = t.Email,
+                PhoneNumber = t.PhoneNumber,
                 Competences = t.Competences.Select(c => c.Name).ToList()
             }).SingleOrDefaultAsync();
         }
@@ -61,8 +64,14 @@ namespace CoursesApi.Repositories
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                Address = model.Address,
+                Address = new Address
+                {
+                    Street = model.City,
+                    ZipCode = model.ZipCode,
+                    City = model.City
+                },
                 Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
                 Competences = competences
             };
 
@@ -71,13 +80,14 @@ namespace CoursesApi.Repositories
 
         public async Task UpdateTeacherAsync(int id, PostTeacherViewModel model)
         {
-            var teacherToUpdate = _context.Teachers.SingleOrDefault(t => t.Id == id);
+            var teacherToUpdate = _context.Teachers.Include(t => t.Competences).SingleOrDefault(t => t.Id == id);
             if (teacherToUpdate is null)
             {
                 throw new Exception($"Could not find teacher with id: {id}");
             }
 
             var competences = new List<Category>();
+
             foreach (var competence in model.Competences)
             {
 
@@ -93,8 +103,14 @@ namespace CoursesApi.Repositories
 
             teacherToUpdate.FirstName = model.FirstName;
             teacherToUpdate.LastName = model.LastName;
-            teacherToUpdate.Address = model.Address;
+            teacherToUpdate.Address = new Address
+            {
+                Street = model.City,
+                ZipCode = model.ZipCode,
+                City = model.City
+            };
             teacherToUpdate.Email = model.Email;
+            teacherToUpdate.PhoneNumber = model.PhoneNumber;
             teacherToUpdate.Competences = competences;
 
             _context.Teachers.Update(teacherToUpdate);

@@ -49,8 +49,8 @@ namespace CoursesApi.Repositories
                     Id = t.Id,
                     FirstName = t.FirstName,
                     LastName = t.LastName,
-                    Address = t.Address,
-                    Email = t.Email
+                    Email = t.Email,
+                    PhoneNumber = t.PhoneNumber
                 }).ToList()
             }).SingleOrDefaultAsync();
             return courses;

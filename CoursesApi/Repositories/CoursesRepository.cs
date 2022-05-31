@@ -62,7 +62,6 @@ namespace CoursesApi.Repositories
                     Id = sc.Student!.Id,
                     FirstName = sc.Student.FirstName,
                     LastName = sc.Student.LastName,
-                    Address = sc.Student.Address,
                     Email = sc.Student.Email
                 }).ToList(),
                 Teachers = c.Teachers.Select(t => new TeacherViewModel
@@ -70,7 +69,6 @@ namespace CoursesApi.Repositories
                     Id = t.Id,
                     FirstName = t.FirstName,
                     LastName = t.LastName,
-                    Address = t.Address,
                     Email = t.Email
                 }).ToList()
             }).SingleOrDefaultAsync();

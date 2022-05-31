@@ -20,7 +20,7 @@ namespace CoursesApi.Controllers
 
             if (response is null)
             {
-                return NotFound();
+                return NotFound($"Could not find teacher with Id: {id}");
             }
 
             return Ok(response);

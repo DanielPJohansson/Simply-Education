@@ -2,8 +2,11 @@
     {
         "FirstName": "Daniel",
         "LastName":"Svensson",
-        "Address":"Gatan 15, 50500 Göteborg",
+        "Street":"Gatan 15",
+        "ZipCode":"50500",
+        "City": "Göteborg",
         "Email": "daniel@teacher.se",
+        "PhoneNumber": "071254786",
         "Competences": [
             ".NET",
             "JavaScript"
@@ -12,8 +15,11 @@
     {
         "FirstName": "Eva",
         "LastName":"Petersson",
-        "Address":"Vägen 31, 50500 Göteborg",
+        "Street":"Vägen 31",
+        "ZipCode":"50500",
+        "City": "Göteborg",
         "Email": "eva@teacher.se",
+        "PhoneNumber": "0702871126",
         "Competences": [
             ".NET",
            "JavaScript"
@@ -22,8 +28,11 @@
     {
         "FirstName": "Alfons",
         "LastName":"Åberg",
-        "Address":"Hörnet 3, 50500 Göteborg",
+        "Street":"Hörnet 3",
+        "ZipCode":"50500",
+        "City": "Göteborg",
         "Email": "alfons@teacher.se",
+        "PhoneNumber": "078471256",
         "Competences": [
             "HTML",
             "CSS",
@@ -33,8 +42,11 @@
     {
         "FirstName": "Eli",
         "LastName":"Jonsson",
-        "Address":"Kullen 112, 50500 Göteborg",
+        "Street":"Kullen 112",
+        "ZipCode":"50500",
+        "City": "Göteborg",
         "Email": "eli@teacher.se",
+        "PhoneNumber": "0736154866",
         "Competences": [
             "C++",
             "Machine learning"
@@ -43,8 +55,11 @@
     {
         "FirstName": "Lina",
         "LastName":"Nilsson",
-        "Address":"Gatan 5, 50500 Göteborg",
+        "Street":"Gatan 5",
+        "ZipCode":"50500",
+        "City": "Göteborg",
         "Email": "lina@teacher.se",
+        "PhoneNumber": "0751698766",
         "Competences": [
             "Python",
            "Machine learning"
@@ -53,8 +68,11 @@
     {
         "FirstName": "Albert",
         "LastName":"Berg",
-        "Address":"Vägen 6, 50500 Göteborg",
+        "Street":"Vägen 6",
+        "ZipCode":"50500",
+        "City": "Göteborg",
         "Email": "albert@teacher.se",
+        "PhoneNumber": "0704125866",
         "Competences": [
             "JavaScript",
             "React"
@@ -63,8 +81,11 @@
     {
         "FirstName": "Asser",
         "LastName":"Malik",
-        "Address":"Kullen 1, 50500 Göteborg",
+        "Street":"Kullen 1",
+        "ZipCode":"50500",
+        "City": "Göteborg",
         "Email": "asser@teacher.se",
+        "PhoneNumber": "0702545896",
         "Competences": [
            "C++"
         ]

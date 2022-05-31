@@ -3,6 +3,7 @@ using System;
 using CoursesApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoursesApi.Data.migrations
 {
     [DbContext(typeof(CoursesContext))]
-    partial class CoursesContextModelSnapshot : ModelSnapshot
+    [Migration("20220531080316_Restructured db")]
+    partial class Restructureddb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
@@ -29,7 +31,7 @@ namespace CoursesApi.Data.migrations
 
                     b.HasIndex("TeachersId");
 
-                    b.ToTable("CategoryTeacher", (string)null);
+                    b.ToTable("CategoryTeacher");
                 });
 
             modelBuilder.Entity("CoursesApi.Models.Address", b =>
@@ -49,7 +51,7 @@ namespace CoursesApi.Data.migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Addresses", (string)null);
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("CoursesApi.Models.Category", b =>
@@ -64,7 +66,7 @@ namespace CoursesApi.Data.migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("CoursesApi.Models.Course", b =>
@@ -98,7 +100,7 @@ namespace CoursesApi.Data.migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Courses", (string)null);
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("CoursesApi.Models.CourseStudent", b =>
@@ -122,7 +124,7 @@ namespace CoursesApi.Data.migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("StudentCourses", (string)null);
+                    b.ToTable("StudentCourses");
                 });
 
             modelBuilder.Entity("CoursesApi.Models.Student", b =>
@@ -143,14 +145,14 @@ namespace CoursesApi.Data.migrations
                     b.Property<string>("LastName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("Students", (string)null);
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("CoursesApi.Models.Teacher", b =>
@@ -171,14 +173,14 @@ namespace CoursesApi.Data.migrations
                     b.Property<string>("LastName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("Teachers", (string)null);
+                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("CourseTeacher", b =>
@@ -193,7 +195,7 @@ namespace CoursesApi.Data.migrations
 
                     b.HasIndex("TeachersId");
 
-                    b.ToTable("CourseTeacher", (string)null);
+                    b.ToTable("CourseTeacher");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

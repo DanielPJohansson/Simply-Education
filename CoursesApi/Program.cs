@@ -1,6 +1,5 @@
 using System.Text;
 using CoursesApi.Data;
-using CoursesApi.Models;
 using CoursesApi.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -23,7 +22,7 @@ builder.Services.AddAuthentication(options =>
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("hejsanhopp")),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration.GetValue<string>("apiKey"))),
         ClockSkew = TimeSpan.Zero
     };
 });

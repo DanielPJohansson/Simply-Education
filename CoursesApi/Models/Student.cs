@@ -11,7 +11,7 @@ namespace CoursesApi.Models
         [ForeignKey("AddressId")]
         public Address? Address { get; set; }
         public string? Email { get; set; }
-        public int PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
         public ICollection<CourseStudent> Courses { get; set; } = new List<CourseStudent>();
     }
 }

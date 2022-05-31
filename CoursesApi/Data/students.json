@@ -2,49 +2,64 @@
     {
         "FirstName": "Daniel",
         "LastName":"Johansson",
-        "Address":
-        {"Street":"Gatan 1",
-            "ZipCode":"50500",
-            "City": "Göteborg"},
-        "Email": "daniel@mail.se"
+        "Street":"Gatan 1",
+        "ZipCode":"50500",
+        "City": "Göteborg",
+        "Email": "daniel@mail.se",
+        "PhoneNumber": "0702558866"
     },
     {
         "FirstName": "Elsa",
         "LastName":"Petersson",
-        "Address":
-        {"Street":"Vägen 3",
-            "ZipCode":"50500",
-            "City": "Göteborg"},
-        "Email": "elsa@mail.se"
+        "Street":"Vägen 3",
+        "ZipCode":"50500",
+        "City": "Göteborg",
+        "Email": "elsa@mail.se",
+        "PhoneNumber": "0702512366"
     },
     {
         "FirstName": "Mohammad",
         "LastName":"Johansson",
-        "Address":"Hörnet 23, 50500 Göteborg",
-        "Email": "mohammad@mail.se"
+        "Street":"Hörnet 23",
+        "ZipCode":"50500",
+        "City": "Göteborg",
+        "Email": "mohammad@mail.se",
+        "PhoneNumber": "0702748866"
     },
     {
         "FirstName": "Ejvind",
         "LastName":"Jonsson",
-        "Address":"Kullen 12, 50500 Göteborg",
-        "Email": "ejvind@mail.se"
+        "Street":"Kullen 12",
+        "ZipCode":"50500",
+        "City": "Göteborg",
+        "Email": "ejvind@mail.se",
+        "PhoneNumber": "0702415866"
     },
     {
         "FirstName": "Stina",
         "LastName":"Nilsson",
-        "Address":"Gatan 5, 50500 Göteborg",
-        "Email": "stina@mail.se"
+        "Street":"Gatan 5",
+        "ZipCode":"50500",
+        "City": "Göteborg",
+        "Email": "stina@mail.se",
+        "PhoneNumber": "070285666"
     },
     {
         "FirstName": "Algot",
         "LastName":"Fanér",
-        "Address":"Vägen 6, 50500 Göteborg",
-        "Email": "algot@mail.se"
+        "Street":"Vägen 6",
+        "ZipCode":"50500",
+        "City": "Göteborg",
+        "Email": "algot@mail.se",
+        "PhoneNumber": "0702844866"
     },
     {
         "FirstName": "Malala",
         "LastName":"Malik",
-        "Address":"Kullen 1, 50500 Göteborg",
-        "Email": "malala@mail.se"
+        "Street":"Kullen 1",
+        "ZipCode":"50500",
+        "City": "Göteborg",
+        "Email": "malala@mail.se",
+        "PhoneNumber": "0702558561"
     }
 ]

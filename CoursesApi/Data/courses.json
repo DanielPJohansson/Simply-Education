@@ -1,0 +1,50 @@
+[
+    {
+        "CourseCode": "1101",
+        "Name": "Introduction to C#",
+        "DurationInHours": 40,
+        "Category": ".NET",
+        "Description": "Introductory course in C#",
+        "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium corrupti iure, nobis asperiores totam nesciunt est doloribus in aut animi vero. Laudantium voluptatum fugit unde dolores obcaecati, doloremque quidem officiis?"
+    },
+    {
+        "CourseCode": "1102",
+        "Name": "Intermediate C#",
+        "DurationInHours": 40,
+        "Category": ".NET",
+        "Description": "Continuation course in C#, intermediate",
+        "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium corrupti iure, nobis asperiores totam nesciunt est doloribus in aut animi vero. Laudantium voluptatum fugit unde dolores obcaecati, doloremque quidem officiis?"
+    },
+    {
+        "CourseCode": "1103",
+        "Name": "Advanced C#",
+        "DurationInHours": 40,
+        "Category": ".NET",
+        "Description": "Continuation course in C#, advanced",
+        "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium corrupti iure, nobis asperiores totam nesciunt est doloribus in aut animi vero. Laudantium voluptatum fugit unde dolores obcaecati, doloremque quidem officiis?"
+    },
+    {
+        "CourseCode": "2001",
+        "Name": "JavaScript for web developers",
+        "DurationInHours": 40,
+        "Category": "Javascript",
+        "Description": "Introduction course in JavaScript",
+        "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium corrupti iure, nobis asperiores totam nesciunt est doloribus in aut animi vero. Laudantium voluptatum fugit unde dolores obcaecati, doloremque quidem officiis?"
+    },
+    {
+        "CourseCode": "2101",
+        "Name": "Learn HTML for web development",
+        "DurationInHours": 10,
+        "Category": "HTML",
+        "Description": "Introductory course in HTML",
+        "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium corrupti iure, nobis asperiores totam nesciunt est doloribus in aut animi vero. Laudantium voluptatum fugit unde dolores obcaecati, doloremque quidem officiis?"
+    },
+    {
+        "CourseCode": "2101",
+        "Name": "Learn CSS for web development",
+        "DurationInHours": 10,
+        "Category": "CSS",
+        "Description": "Introductory course in CSS",
+        "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium corrupti iure, nobis asperiores totam nesciunt est doloribus in aut animi vero. Laudantium voluptatum fugit unde dolores obcaecati, doloremque quidem officiis?"
+    }
+]

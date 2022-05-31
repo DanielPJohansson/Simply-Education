@@ -24,9 +24,27 @@ namespace CoursesApi.Data
             }
 
             var studentData = await File.ReadAllTextAsync("Data/students.json");
-            var students = JsonSerializer.Deserialize<List<Student>>(studentData);
+            var students = JsonSerializer.Deserialize<List<PostStudentViewModel>>(studentData);
 
-            await context.AddRangeAsync(students!);
+            foreach (var student in students!)
+            {
+                var newStudent = new Student
+                {
+                    FirstName = student.FirstName,
+                    LastName = student.LastName,
+                    Address = new Address
+                    {
+                        Street = student.City,
+                        ZipCode = student.ZipCode,
+                        City = student.City
+                    },
+                    Email = student.Email,
+                    PhoneNumber = student.PhoneNumber,
+                };
+
+                context.Students.Add(newStudent);
+            }
+
             await context.SaveChangesAsync();
         }
 
@@ -52,12 +70,19 @@ namespace CoursesApi.Data
                     }
                     competences.Add(category);
                 }
+
                 var newTeacher = new Teacher
                 {
                     FirstName = teacher.FirstName,
                     LastName = teacher.LastName,
-                    Address = teacher.Address,
+                    Address = new Address
+                    {
+                        Street = teacher.City,
+                        ZipCode = teacher.ZipCode,
+                        City = teacher.City
+                    },
                     Email = teacher.Email,
+                    PhoneNumber = teacher.PhoneNumber,
                     Competences = competences
                 };
 
@@ -82,17 +107,31 @@ namespace CoursesApi.Data
         }
         public static async Task SeedCourses(CoursesContext context)
         {
-            // if (await context.Courses.AnyAsync())
-            // {
-            //     return;
-            // }
+            if (await context.Courses.AnyAsync())
+            {
+                return;
+            }
 
-            // var courseData = await File.ReadAllTextAsync("Data/courses.json");
-            // var courses = JsonSerializer.Deserialize<List<Course>>(courseData);
+            var courseData = await File.ReadAllTextAsync("Data/courses.json");
+            var courses = JsonSerializer.Deserialize<List<PostCourseViewModel>>(courseData);
 
-            // await context.AddRangeAsync(courses!);
-            // await context.SaveChangesAsync();
+            foreach (var course in courses!)
+            {
+                var category = await context.Categories.SingleOrDefaultAsync(c => c.Name.ToLower() == course.Category.ToLower());
+
+                var newCourse = new Course
+                {
+                    CourseCode = course.CourseCode,
+                    Name = course.Name,
+                    DurationInHours = course.DurationInHours,
+                    Category = category!,
+                    Description = course.Description,
+                    Details = course.Details
+                };
+
+                await context.Courses.AddAsync(newCourse);
+            }
+            await context.SaveChangesAsync();
         }
-
     }
 }
