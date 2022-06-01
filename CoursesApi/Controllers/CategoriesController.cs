@@ -38,7 +38,7 @@ namespace CoursesApi.Controllers
             return Ok(response);
         }
 
-        [HttpGet()]
+        [HttpGet("list")]
         public async Task<ActionResult> GetCategories()
         {
             var response = await _repository.GetCategoriesAsync();

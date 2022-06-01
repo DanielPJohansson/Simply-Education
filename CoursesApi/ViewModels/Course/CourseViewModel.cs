@@ -7,6 +7,7 @@ namespace CoursesApi.ViewModels
         public string? Name { get; set; }
         public double DurationInHours { get; set; }
         public string? Category { get; set; }
+        public string? ImageUrl { get; set; }
         public string? Description { get; set; }
 
         //Potentiellt behövs formatering lagras här

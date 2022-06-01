@@ -12,6 +12,7 @@ namespace CoursesApi.ViewModels
         public double DurationInHours { get; set; }
         [Required(ErrorMessage = "Course category is required")]
         public string? Category { get; set; }
+        public string? ImageUrl { get; set; }
         [Required(ErrorMessage = "Desription field is required")]
         public string? Description { get; set; }
 

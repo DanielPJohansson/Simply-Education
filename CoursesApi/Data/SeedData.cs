@@ -126,7 +126,8 @@ namespace CoursesApi.Data
                     DurationInHours = course.DurationInHours,
                     Category = category!,
                     Description = course.Description,
-                    Details = course.Details
+                    Details = course.Details,
+                    ImageUrl = course.ImageUrl
                 };
 
                 await context.Courses.AddAsync(newCourse);

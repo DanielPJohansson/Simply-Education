@@ -11,6 +11,7 @@ namespace CoursesApi.Models
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public Category Category { get; set; } = new Category();
+        public string? ImageUrl { get; set; }
         public string? Description { get; set; }
 
         //Potentiellt behövs formatering lagras här

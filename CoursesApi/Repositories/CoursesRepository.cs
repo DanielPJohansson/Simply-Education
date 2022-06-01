@@ -23,6 +23,7 @@ namespace CoursesApi.Repositories
                 Name = c.Name,
                 DurationInHours = c.DurationInHours,
                 Category = c.Category.Name,
+                ImageUrl = c.ImageUrl,
                 Description = c.Description,
                 Details = c.Details
             })
@@ -34,6 +35,7 @@ namespace CoursesApi.Repositories
             return await _context.Courses.Where(c => c.IsDeprecated == false)
             .Include(c => c.Category)
             .Include(c => c.Teachers)
+            .OrderBy(c => c.CourseCode)
             .Select(c => new CourseViewModel
             {
                 CourseId = c.Id,
@@ -41,6 +43,7 @@ namespace CoursesApi.Repositories
                 Name = c.Name,
                 DurationInHours = c.DurationInHours,
                 Category = c.Category.Name,
+                ImageUrl = c.ImageUrl,
                 Description = c.Description,
                 Details = c.Details
             }).ToListAsync();
@@ -95,6 +98,7 @@ namespace CoursesApi.Repositories
                 Name = model.Name,
                 DurationInHours = model.DurationInHours,
                 Description = model.Description,
+                ImageUrl = model.ImageUrl,
                 Details = model.Details,
                 Category = category
             };
@@ -174,6 +178,7 @@ namespace CoursesApi.Repositories
             courseToUpdate.DurationInHours = model.DurationInHours;
             courseToUpdate.Description = model.Description;
             courseToUpdate.Details = model.Details;
+            courseToUpdate.ImageUrl = model.ImageUrl;
             courseToUpdate.Category = category;
 
             _context.Courses.Update(courseToUpdate);

@@ -4,15 +4,17 @@
         "Name": "Introduction to C#",
         "DurationInHours": 40,
         "Category": ".NET",
-        "Description": "Introductory course in C#",
-        "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium corrupti iure, nobis asperiores totam nesciunt est doloribus in aut animi vero. Laudantium voluptatum fugit unde dolores obcaecati, doloremque quidem officiis?"
+        "ImageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Csharp_Logo.png",
+        "Description": "Introductory course in C#. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt magnam itaque veniam sed est sapiente corporis eaque officia sequi labore rerum in nam nemo aperiam qui architecto soluta, eos voluptate.",
+        "Details": "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, qui? Sed cumque earum impedit praesentium, facere recusandae magni magnam quia rem sit fugit quo omnis debitis qui molestias dolorum aut.</p> <h3>Course content</h3> <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti harum praesentium illum fugiat dolorum nesciunt autem! Laborum labore quia totam, fugit laboriosam facilis aperiam cumque expedita repudiandae, reiciendis natus ipsum. Dicta facere non voluptatum ipsa, velit exercitationem dolorem vel excepturi veniam ratione voluptatibus molestiae optio voluptas ullam itaque sit, error culpa veritatis ab enim nam. Tenetur inventore corrupti deserunt at?</p> <ul> <li>We will do this</li><li>And this as well</li><li>And finally this</li></ul><h3>Learning outcomes</h3><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis incidunt eveniet voluptate, pariatur soluta quam? Itaque, asperiores molestiae. Iusto est, perferendis sint totam obcaecati cum minus blanditiis quod nemo nobis. Ex sunt commodi nemo nam adipisci ullam illum animi deserunt aperiam? Laborum veritatis magnam, similique voluptates earum sint cumque voluptas? Fuga possimus necessitatibus ducimus. Nisi nam mollitia blanditiis sit nihil?</p>"
     },
     {
         "CourseCode": "1102",
         "Name": "Intermediate C#",
         "DurationInHours": 40,
         "Category": ".NET",
-        "Description": "Continuation course in C#, intermediate",
+        "ImageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Csharp_Logo.png",
+        "Description": "Continuation course in C#, intermediate. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt magnam itaque veniam sed est sapiente corporis eaque officia sequi labore rerum in nam nemo aperiam qui architecto soluta, eos voluptate.",
         "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium corrupti iure, nobis asperiores totam nesciunt est doloribus in aut animi vero. Laudantium voluptatum fugit unde dolores obcaecati, doloremque quidem officiis?"
     },
     {
@@ -20,7 +22,8 @@
         "Name": "Advanced C#",
         "DurationInHours": 40,
         "Category": ".NET",
-        "Description": "Continuation course in C#, advanced",
+        "ImageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Csharp_Logo.png",
+        "Description": "Continuation course in C#, advanced. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt magnam itaque veniam sed est sapiente corporis eaque officia sequi labore rerum in nam nemo aperiam qui architecto soluta, eos voluptate.",
         "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium corrupti iure, nobis asperiores totam nesciunt est doloribus in aut animi vero. Laudantium voluptatum fugit unde dolores obcaecati, doloremque quidem officiis?"
     },
     {
@@ -28,7 +31,8 @@
         "Name": "JavaScript for web developers",
         "DurationInHours": 40,
         "Category": "Javascript",
-        "Description": "Introduction course in JavaScript",
+        "ImageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png",
+        "Description": "Introduction course in JavaScript. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt magnam itaque veniam sed est sapiente corporis eaque officia sequi labore rerum in nam nemo aperiam qui architecto soluta, eos voluptate.",
         "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium corrupti iure, nobis asperiores totam nesciunt est doloribus in aut animi vero. Laudantium voluptatum fugit unde dolores obcaecati, doloremque quidem officiis?"
     },
     {
@@ -36,15 +40,17 @@
         "Name": "Learn HTML for web development",
         "DurationInHours": 10,
         "Category": "HTML",
-        "Description": "Introductory course in HTML",
+        "ImageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg",
+        "Description": "Introductory course in HTML. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt magnam itaque veniam sed est sapiente corporis eaque officia sequi labore rerum in nam nemo aperiam qui architecto soluta, eos voluptate.",
         "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium corrupti iure, nobis asperiores totam nesciunt est doloribus in aut animi vero. Laudantium voluptatum fugit unde dolores obcaecati, doloremque quidem officiis?"
     },
     {
-        "CourseCode": "2101",
+        "CourseCode": "2102",
         "Name": "Learn CSS for web development",
         "DurationInHours": 10,
         "Category": "CSS",
-        "Description": "Introductory course in CSS",
+        "ImageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg",
+        "Description": "Introductory course in CSS. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt magnam itaque veniam sed est sapiente corporis eaque officia sequi labore rerum in nam nemo aperiam qui architecto soluta, eos voluptate.",
         "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium corrupti iure, nobis asperiores totam nesciunt est doloribus in aut animi vero. Laudantium voluptatum fugit unde dolores obcaecati, doloremque quidem officiis?"
     }
 ]

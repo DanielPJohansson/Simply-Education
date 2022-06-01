@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap);
+
 * {
     margin: 0;
     padding: 0;
@@ -9,10 +11,14 @@ body {
 }
 
 main {
+    position: absolute;
     width: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: whitesmoke;
+    z-index: -2;
 }
 
 header {
@@ -21,6 +27,12 @@ header {
     align-items: center;
     padding: 5rem;
     width: 100%;
+}
+
+select, button {
+    border: none;
+    outline: none !important;
+    font-family: "Comfortaa";
 }
 
 #navbar {
@@ -35,6 +47,7 @@ header {
     height: 3rem;
     padding: 0 2rem;
     background-color: #333;
+    z-index: 1;
     
 }
 
@@ -78,3 +91,40 @@ header {
 #logo i {
     margin-right: 0.5rem;;
 }
+
+.filter-wrapper {
+
+}
+
+.filter-wrapper label {
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.button {
+    font-size: 1.2rem;
+    background-color: rgb(126, 126, 126);
+    color: whitesmoke;
+    padding: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: rgb(114, 114, 114);
+}
+
+.button:active {
+    background-color: rgb(75, 75, 75);
+}
+
+.form-field {
+    font-size: 1.2rem;
+    background-color: rgb(126, 126, 126);
+    color: whitesmoke;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+
+

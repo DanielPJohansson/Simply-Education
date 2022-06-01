@@ -12,10 +12,9 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="./content/css/style.css" />
-    <link rel="stylesheet" href="./content/css/gallery.css" />
+    <link rel="stylesheet" href="./content/css/details.css" />
     <title>Simply Education</title>
   </head>
-
   <body>
     <nav id="navbar">
       <h1 id="logo"><i class="fa-solid fa-book-open-reader"></i>SimplE</h1>
@@ -27,20 +26,37 @@
     </nav>
     <main>
       <header>
-        <h1 class="page-title">Courses</h1>
+        <img id="course-image" src="" alt="course image" />
+        <h1 id="course-name" class="page-title">Introduction to C#</h1>
       </header>
 
-      <section class="filter-wrapper">
-        <label for="categories">Categories: </label>
-        <select name="categories" id="categories-list" class="form-field">
-          <option value="all">All</option>
-        </select>
-        <button id="filter-btn" type="button" class="button">Filter</button>
+      <section class="course-overview-wrapper">
+        <table class="course-table">
+          <tr>
+            <td>Course code</td>
+            <td id="course-code"></td>
+          </tr>
+          <tr>
+            <td>Course duration</td>
+            <td id="course-duration"></td>
+          </tr>
+          <tr>
+            <td>Category</td>
+            <td id="course-category"></td>
+          </tr>
+        </table>
+        <div class="course-description">
+          <h2>Description</h2>
+          <p id="course-description"></p>
+        </div>
       </section>
 
-      <section class="gallery-wrapper"></section>
+      <section class="course-details">
+        <h2>Details</h2>
+        <div id="course-details"></div>
+      </section>
     </main>
 
-    <script src="./content/scripts/courses-gallery.js"></script>
+    <script src="./content/scripts/details.js"></script>
   </body>
 </html>

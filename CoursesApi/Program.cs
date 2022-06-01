@@ -38,6 +38,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("SimpleE", policy =>
+    {
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+        policy.WithOrigins("http://127.0.0.1:5501");
+    });
+});
 
 var app = builder.Build();
 
@@ -50,6 +59,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("SimpleE");
 
 app.UseAuthentication();
 app.UseAuthorization();
