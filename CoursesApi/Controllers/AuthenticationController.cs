@@ -51,11 +51,17 @@ namespace CoursesApi.Controllers
             }
             else
             {
+                ErrorViewModel errorModel = new ErrorViewModel
+                {
+                    StatusCode = 500,
+                    StatusMessage = "Error during registration of user"
+                };
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError("User registration", error.Description);
+                    errorModel.Errors.Add(error.Code, error.Description);
                 }
-                return StatusCode(500, ModelState);
+
+                return StatusCode(500, errorModel);
             }
         }
 

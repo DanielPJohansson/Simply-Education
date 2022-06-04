@@ -1,130 +1,123 @@
 @import url(https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap);
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: "Comfortaa";
+  font-family: "Comfortaa";
 }
 
 main {
-    position: absolute;
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: whitesmoke;
-    z-index: -2;
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: whitesmoke;
+  z-index: -2;
 }
 
 header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 5rem;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5rem 0 2rem 0;
+  width: 100%;
 }
 
-select, button {
-    border: none;
-    outline: none !important;
-    font-family: "Comfortaa";
+header h1 {
+  max-width: 90%;
+}
+
+input,
+select,
+button {
+  border: none;
+  outline: none !important;
+  font-family: "Comfortaa";
 }
 
 #navbar {
-    position: fixed;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3rem;
-    padding: 0 2rem;
-    background-color: #333;
-    z-index: 1;
-    
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3rem;
+  padding: 0 2rem;
+  background-color: #333;
+  z-index: 1;
 }
 
 #navbar ul {
-    display: flex;
-    flex-direction: row;
-    list-style: none;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
 }
 
 #navbar a {
-    position: relative;
-    width: 100%;
-    margin: 0.5rem;
-    text-decoration: none;
-    color:antiquewhite;
+  position: relative;
+  width: 100%;
+  margin: 0.5rem;
+  text-decoration: none;
+  color: antiquewhite;
 }
 
-#navbar a:hover{
-    /* background-color: antiquewhite; */
-    color: #333;
-    transition: 300ms;
+#navbar a:hover {
+  /* background-color: antiquewhite; */
+  color: #333;
+  transition: 300ms;
 }
 
 #navbar a::before {
-    content: "";
-    position: absolute;
-    width: 0%;
-    height: 100%;
-    z-index: -1;
-    background-color: antiquewhite;
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 100%;
+  z-index: -1;
+  background-color: antiquewhite;
 }
 #navbar a:hover::before {
-    width: 100%;
-    transition: 300ms;
+  width: 100%;
+  transition: 300ms;
 }
 
 #logo {
-    color:antiquewhite;
+  color: antiquewhite;
 }
 
 #logo i {
-    margin-right: 0.5rem;;
+  margin-right: 0.5rem;
 }
 
 .filter-wrapper {
-
 }
 
 .filter-wrapper label {
-    font-size: 1.2rem;
-    font-weight: 800;
+  font-size: 1.2rem;
+  font-weight: 800;
 }
 
 .button {
-    font-size: 1.2rem;
-    background-color: rgb(126, 126, 126);
-    color: whitesmoke;
-    padding: 0.5rem;
-    border-radius: 5px;
-    cursor: pointer;
+  font-size: 1.2rem;
+  background-color: rgb(126, 126, 126);
+  color: whitesmoke;
+  padding: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .button:hover {
-    background-color: rgb(114, 114, 114);
+  background-color: rgb(114, 114, 114);
 }
 
 .button:active {
-    background-color: rgb(75, 75, 75);
+  background-color: rgb(75, 75, 75);
 }
-
-.form-field {
-    font-size: 1.2rem;
-    background-color: rgb(126, 126, 126);
-    color: whitesmoke;
-    padding: 0.5rem;
-    border-radius: 5px;
-}
-
-
-
