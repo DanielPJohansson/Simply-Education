@@ -32,12 +32,9 @@ namespace CoursesApi.Data
                 {
                     FirstName = student.FirstName,
                     LastName = student.LastName,
-                    Address = new Address
-                    {
-                        Street = student.City,
-                        ZipCode = student.ZipCode,
-                        City = student.City
-                    },
+                    Street = student.Street,
+                    ZipCode = student.ZipCode,
+                    City = student.City,
                     Email = student.Email,
                     PhoneNumber = student.PhoneNumber,
                 };
@@ -75,12 +72,9 @@ namespace CoursesApi.Data
                 {
                     FirstName = teacher.FirstName,
                     LastName = teacher.LastName,
-                    Address = new Address
-                    {
-                        Street = teacher.City,
-                        ZipCode = teacher.ZipCode,
-                        City = teacher.City
-                    },
+                    Street = teacher.Street,
+                    ZipCode = teacher.ZipCode,
+                    City = teacher.City,
                     Email = teacher.Email,
                     PhoneNumber = teacher.PhoneNumber,
                     Competences = competences

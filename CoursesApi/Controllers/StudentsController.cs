@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoursesApi.Controllers
@@ -23,14 +24,19 @@ namespace CoursesApi.Controllers
                 return NotFound();
             }
 
-            return Ok(response);
+            return Ok(new ResponseViewModel(
+                statusCode: 200,
+                data: JsonSerializer.Serialize(response)));
         }
 
         [HttpGet("list")]
         public async Task<ActionResult> GetStudents()
         {
             var response = await _repository.GetStudentsAsync();
-            return Ok(response);
+            return Ok(new ResponseViewModel(
+                statusCode: 200,
+                count: response.Count(),
+                data: JsonSerializer.Serialize(response)));
         }
 
         [HttpPost]

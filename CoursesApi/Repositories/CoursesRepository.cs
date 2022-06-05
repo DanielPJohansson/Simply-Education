@@ -48,6 +48,19 @@ namespace CoursesApi.Repositories
                 Details = c.Details
             }).ToListAsync();
         }
+        public async Task<IEnumerable<CategoryViewModel>> GetCategoriesForActiveCoursesAsync()
+        {
+            return await _context.Courses.Where(c => c.IsDeprecated == false)
+                        .Include(c => c.Category)
+                        .OrderBy(c => c.Category.Name)
+                        .Select(c => new CategoryViewModel
+                        {
+                            CategoryId = c.Category.Id,
+                            Name = c.Category.Name
+                        })
+                        .Distinct()
+                        .ToListAsync();
+        }
 
         public async Task<CourseWithStudentsAndTeachersViewModel?> GetCourseWithStudentsAndTeachersAsync(int courseId)
         {

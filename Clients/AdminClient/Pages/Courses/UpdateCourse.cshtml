@@ -1,0 +1,65 @@
+@page
+@model AdminClient.Pages.Courses.UpdateCourse
+
+@section styles {
+<link rel="stylesheet" href="~/css/form.css">
+}
+
+@{
+    ViewData["Title"] = "Edit Course";
+}
+
+<header>
+    <h1 class="page-title">Edit course</h1>
+</header>
+<section class="form-wrapper">
+    <form class="form" method="post">
+        <div class="form-control">
+            <input type="hidden" asp-for="CourseId">
+        </div>
+        <div class="form-control">
+            <label asp-for="Course.CourseCode"></label>
+            <input class="form-field" asp-for="Course.CourseCode" />
+            <span asp-validation-for="Course.CourseCode" class="error-field"></span>
+        </div>
+        <div class="form-control">
+            <label asp-for="Course.Name"></label>
+            <input class="form-field" asp-for="Course.Name" />
+            <span asp-validation-for="Course.Name" class="error-field"></span>
+        </div>
+        <div class="form-control">
+            <label asp-for="Course.Category"></label>
+            <select class="form-field" asp-for="Course.Category" asp-items="Model.Categories"></select>
+            <span asp-validation-for="Course.Category" class="error-field"></span>
+        </div>
+        <div class="form-control">
+            <label asp-for="Course.DurationInHours"></label>
+            <input class="form-field" asp-for="Course.DurationInHours" />
+            <span asp-validation-for="Course.DurationInHours" class="error-field"></span>
+        </div>
+        <div class="form-control">
+            <label asp-for="Course.ImageUrl"></label>
+            <input class="form-field" asp-for="Course.ImageUrl" />
+        </div>
+        <div class="form-control">
+            <label asp-for="Course.Description"></label>
+            <textarea class="form-field" asp-for="Course.Description" rows="10"></textarea>
+            <span asp-validation-for="Course.Description" class="error-field"></span>
+        </div>
+        <div class="form-control">
+            <label asp-for="Course.Details"></label>
+            <textarea id="details" class="form-field" asp-for="Course.Details"></textarea>
+            <span asp-validation-for="Course.Details" class="error-field"></span>
+        </div>
+        <button type="submit" class="button">Spara</button>
+    </form>
+</section>
+
+@section scripts {
+<script src="~/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#details'
+    });
+</script>
+}

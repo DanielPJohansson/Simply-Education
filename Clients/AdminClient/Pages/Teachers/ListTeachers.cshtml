@@ -1,0 +1,40 @@
+@page
+@model AdminClient.Pages.Courses.ListTeachers
+
+@section styles {
+<link rel="stylesheet" href="~/css/list.css">
+}
+
+
+@{
+    ViewData["Title"] = "Admin - Teachers";
+}
+
+<header>
+    <h1 class="page-title">Teacher administration</h1>
+</header>
+<section class="list-wrapper">
+    <a class="button" asp-page="/Teachers/AddTeacher">Add new teacher</a>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email address</th>
+            <th>Phone number</th>
+            <th>Edit/Delete</th>
+        </tr>
+        @foreach (var teacher in Model.Teachers)
+        {
+            <tr class="list-row">
+                <td>@teacher.Id</td>
+                <td>@teacher.FirstName @teacher.LastName</td>
+                <td>@teacher.Email</td>
+                <td>@teacher.PhoneNumber</td>
+                <td class="list-item-links">
+                    <a asp-page="/Teachers/UpdateTeacher" asp-route-id="@teacher.Id" class="fa-solid fa-pen-to-square"></a>
+                    <a asp-page="/Teachers/DeleteTeacher" asp-route-id="@teacher.Id" class="fa-solid fa-user-minus"></a>
+                </td>
+            </tr>
+        }
+        </ul>
+</section>

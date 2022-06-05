@@ -1,0 +1,35 @@
+#course-image {
+    width: 500px;
+    max-width: 90%;
+}
+
+.course-table {
+    font-size: 1.2rem;
+
+}
+
+.course-table th{
+    text-align: left;
+    font-size: 1.2rem;
+    padding: 0.5rem 2rem 0 0;
+}
+
+.course-overview-wrapper {
+    margin: 0rem 1rem;
+    max-width: 1000px;
+    background-color: white;
+}
+.course-details {
+    margin: 2rem 1rem;
+    max-width: 1000px;
+}
+.course-details h2, h3{
+    margin: 1rem 0 0.5rem 0;
+}
+
+.course-details  p{
+    margin-bottom: 1rem;
+}
+.course-details ul{
+    margin: 1rem 2rem;
+}

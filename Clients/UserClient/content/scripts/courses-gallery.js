@@ -2,12 +2,12 @@
 
 const gallery = document.querySelector(".gallery-wrapper");
 const selectList = document.querySelector("#categories-list");
-const baseUrl = "https://localhost:7210/api/v1";
+const baseUrl = "https://localhost:7210/api/v1/courses";
 const filterBtn = document.querySelector("#filter-btn");
 let courses;
 
 async function getCourses() {
-  let url = `${baseUrl}/courses/list`;
+  let url = `${baseUrl}/list`;
 
   let response = await fetch(url);
 
@@ -15,7 +15,8 @@ async function getCourses() {
     console.log("Could not fetch courses.");
   }
 
-  courses = await response.json();
+  const responseModel = await response.json();
+  courses = JSON.parse(responseModel.data);
 
   gallery.innerHTML = "";
   courses.forEach((course) => {
@@ -24,13 +25,14 @@ async function getCourses() {
 }
 
 async function getCategories() {
-  let url = `${baseUrl}/categories/list`;
+  let url = `${baseUrl}/categories`;
   let response = await fetch(url);
   if (!response.ok) {
     console.log("Could not fetch categories.");
   }
 
-  let categories = await response.json();
+  const responseModel = await response.json();
+  const categories = JSON.parse(responseModel.data);
 
   categories.forEach((category) => {
     createSelectListHtml(category);
@@ -46,7 +48,7 @@ function filterByCategory(categoryName) {
   }
 
   courses.forEach((course) => {
-    if (course.category.toLowerCase() === categoryName.toLowerCase()) {
+    if (course.Category.toLowerCase() === categoryName.toLowerCase()) {
       createGalleryCardHtml(course);
     }
   });
@@ -55,12 +57,12 @@ function filterByCategory(categoryName) {
 function createGalleryCardHtml(course) {
   gallery.insertAdjacentHTML(
     "beforeend",
-    `<a class="gallery-card" href="details.html?courseId=${course.courseId}">
-    <img src="${course.imageUrl}" alt="Course image">
+    `<a class="gallery-card" href="details.html?courseId=${course.CourseId}">
+    <img src="${course.ImageUrl}" alt="Course image">
     <div class="gallery-card-content">
-    <h3>${course.name}</h3>
-    <h4><span>Course code: ${course.courseCode}</span><span>${course.durationInHours} hours</span></h4>
-    <p>${course.description}</p>
+    <h3>${course.Name}</h3>
+    <h4><span>Course code: ${course.CourseCode}</span><span>${course.DurationInHours} hours</span></h4>
+    <p>${course.Description}</p>
     </div>
     </a>`
   );
@@ -69,7 +71,7 @@ function createGalleryCardHtml(course) {
 function createSelectListHtml(category) {
   selectList.insertAdjacentHTML(
     "beforeend",
-    `<option value="${category.name}">${category.name}</option>`
+    `<option value="${category.Name}">${category.Name}</option>`
   );
 }
 

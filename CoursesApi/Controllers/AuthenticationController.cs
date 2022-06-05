@@ -51,7 +51,7 @@ namespace CoursesApi.Controllers
             }
             else
             {
-                ErrorViewModel errorModel = new ErrorViewModel
+                var errorModel = new ErrorViewModel
                 {
                     StatusCode = 500,
                     StatusMessage = "Error during registration of user"

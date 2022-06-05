@@ -4,6 +4,7 @@ namespace CoursesApi.Interfaces
     {
         public Task<CourseViewModel?> GetCourseAsync(int id);
         public Task<IEnumerable<CourseViewModel>> GetCoursesAsync();
+        public Task<IEnumerable<CategoryViewModel>> GetCategoriesForActiveCoursesAsync();
         public Task<CourseWithStudentsAndTeachersViewModel?> GetCourseWithStudentsAndTeachersAsync(int courseId);
         public Task AddCourseAsync(PostCourseViewModel model);
         public Task AddTeacherToCourseAsync(PostTeacherToCourseViewModel model);

@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoursesApi.Controllers
@@ -17,7 +18,11 @@ namespace CoursesApi.Controllers
         public async Task<ActionResult> GetCourses()
         {
             var response = await _repository.GetCoursesAsync();
-            return Ok(response);
+            // return Ok(response);
+            return Ok(new ResponseViewModel(
+                statusCode: 200,
+                count: response.Count(),
+                data: JsonSerializer.Serialize(response)));
         }
 
         [HttpGet("{id}")]
@@ -28,7 +33,20 @@ namespace CoursesApi.Controllers
             {
                 return NotFound($"Could not find course with Id: {id}");
             }
-            return Ok(response);
+            return Ok(new ResponseViewModel(
+                statusCode: 200,
+                data: JsonSerializer.Serialize(response)));
+        }
+
+        [HttpGet("categories")]
+        public async Task<ActionResult> GetCategoriesForActiveCourses()
+        {
+            var response = await _repository.GetCategoriesForActiveCoursesAsync();
+            // return Ok(response);
+            return Ok(new ResponseViewModel(
+                statusCode: 200,
+                count: response.Count(),
+                data: JsonSerializer.Serialize(response)));
         }
 
         [HttpGet("{id}/list")]
@@ -39,7 +57,9 @@ namespace CoursesApi.Controllers
             {
                 return NotFound($"Could not find course with Id: {id}");
             }
-            return Ok(response);
+            return Ok(new ResponseViewModel(
+                statusCode: 200,
+                data: JsonSerializer.Serialize(response)));
         }
 
         [HttpPost("{id}/students")]

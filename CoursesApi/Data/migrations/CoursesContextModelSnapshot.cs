@@ -32,26 +32,6 @@ namespace CoursesApi.Data.migrations
                     b.ToTable("CategoryTeacher");
                 });
 
-            modelBuilder.Entity("CoursesApi.Models.Address", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("City")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Street")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ZipCode")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Addresses");
-                });
-
             modelBuilder.Entity("CoursesApi.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -134,8 +114,8 @@ namespace CoursesApi.Data.migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AddressId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("City")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
@@ -149,9 +129,13 @@ namespace CoursesApi.Data.migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.Property<string>("Street")
+                        .HasColumnType("TEXT");
 
-                    b.HasIndex("AddressId");
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Students");
                 });
@@ -162,8 +146,8 @@ namespace CoursesApi.Data.migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AddressId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("City")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
@@ -177,9 +161,13 @@ namespace CoursesApi.Data.migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.Property<string>("Street")
+                        .HasColumnType("TEXT");
 
-                    b.HasIndex("AddressId");
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Teachers");
                 });
@@ -436,28 +424,6 @@ namespace CoursesApi.Data.migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("CoursesApi.Models.Student", b =>
-                {
-                    b.HasOne("CoursesApi.Models.Address", "Address")
-                        .WithMany("Students")
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Address");
-                });
-
-            modelBuilder.Entity("CoursesApi.Models.Teacher", b =>
-                {
-                    b.HasOne("CoursesApi.Models.Address", "Address")
-                        .WithMany("Teachers")
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Address");
-                });
-
             modelBuilder.Entity("CourseTeacher", b =>
                 {
                     b.HasOne("CoursesApi.Models.Course", null)
@@ -522,13 +488,6 @@ namespace CoursesApi.Data.migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("CoursesApi.Models.Address", b =>
-                {
-                    b.Navigation("Students");
-
-                    b.Navigation("Teachers");
                 });
 
             modelBuilder.Entity("CoursesApi.Models.Category", b =>

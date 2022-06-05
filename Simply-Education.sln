@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoursesApi", "CoursesApi\CoursesApi.csproj", "{952A5974-0D78-4097-8002-E89ACC658B1D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{807892CC-0582-445E-AB0B-6B4BE97A2058}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminClient", "Clients\Adminclient\AdminClient.csproj", "{3FF87749-47C1-4964-97FF-ADD715C54BA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,12 @@ Global
 		{952A5974-0D78-4097-8002-E89ACC658B1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{952A5974-0D78-4097-8002-E89ACC658B1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{952A5974-0D78-4097-8002-E89ACC658B1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FF87749-47C1-4964-97FF-ADD715C54BA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FF87749-47C1-4964-97FF-ADD715C54BA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FF87749-47C1-4964-97FF-ADD715C54BA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FF87749-47C1-4964-97FF-ADD715C54BA1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3FF87749-47C1-4964-97FF-ADD715C54BA1} = {807892CC-0582-445E-AB0B-6B4BE97A2058}
 	EndGlobalSection
 EndGlobal

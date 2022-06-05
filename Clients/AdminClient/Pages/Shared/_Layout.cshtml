@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    @RenderSection("styles", false)
+
+    <title>@ViewData["title"]</title>
+</head>
+
+<body>
+    <nav id="navbar">
+        <h1 id="logo"><i class="fa-solid fa-book-open-reader"></i>SimplE</h1>
+        <ul>
+            <li><a asp-page="/Index">Home</a></li>
+            <li><a asp-page="/Courses/ListCourses">Courses</a></li>
+            <li><a asp-page="/Students/ListStudents">Students</a></li>
+            <li><a asp-page="/Teachers/ListTeachers">Teachers</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

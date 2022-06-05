@@ -20,32 +20,32 @@ function onPageLoad() {
     }
   });
 
-  console.log(courseId);
-
-  const course = getCourse(courseId);
+  getCourse(courseId);
 }
 
 async function getCourse(courseId) {
   const url = `${baseUrl}/${courseId}`;
 
   const response = await fetch(url);
+  console.log(response);
 
-  if (!response.ok) {
+  if (response.ok) {
+    const responseModel = await response.json();
+    const course = JSON.parse(responseModel.data);
+    createHtml(course);
+  } else {
     console.log(`Error when getting course with id: ${courseId}`);
   }
-
-  const course = await response.json();
-  createHtml(course);
 }
 
 function createHtml(course) {
-  image.setAttribute("src", course.imageUrl);
-  name.innerHTML = course.name;
-  courseCode.innerHTML = course.courseCode;
-  duration.innerHTML = course.durationInHours;
-  category.innerHTML = course.category;
-  description.innerHTML = course.description;
-  details.innerHTML = course.details;
+  image.setAttribute("src", course.ImageUrl);
+  name.innerHTML = course.Name;
+  courseCode.innerHTML = course.CourseCode;
+  duration.innerHTML = course.DurationInHours;
+  category.innerHTML = course.Category;
+  description.innerHTML = course.Description;
+  details.innerHTML = course.Details;
 }
 
 onPageLoad();

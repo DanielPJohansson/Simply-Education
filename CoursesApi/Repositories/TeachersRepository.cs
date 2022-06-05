@@ -18,7 +18,9 @@ namespace CoursesApi.Repositories
                 Id = t.Id,
                 FirstName = t.FirstName,
                 LastName = t.LastName,
-                Address = $"{t.Address!.Street}, {t.Address.ZipCode} {t.Address.City}",
+                Street = t.Street,
+                ZipCode = t.ZipCode,
+                City = t.City,
                 Email = t.Email,
                 PhoneNumber = t.PhoneNumber,
                 Competences = t.Competences.Select(c => c.Name).ToList()
@@ -32,7 +34,9 @@ namespace CoursesApi.Repositories
                 Id = t.Id,
                 FirstName = t.FirstName,
                 LastName = t.LastName,
-                Address = $"{t.Address!.Street}, {t.Address.ZipCode} {t.Address.City}",
+                Street = t.Street,
+                ZipCode = t.ZipCode,
+                City = t.City,
                 Email = t.Email,
                 PhoneNumber = t.PhoneNumber,
                 Competences = t.Competences.Select(c => c.Name).ToList()
@@ -64,12 +68,9 @@ namespace CoursesApi.Repositories
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                Address = new Address
-                {
-                    Street = model.City,
-                    ZipCode = model.ZipCode,
-                    City = model.City
-                },
+                Street = model.Street,
+                ZipCode = model.ZipCode,
+                City = model.City,
                 Email = model.Email,
                 PhoneNumber = model.PhoneNumber,
                 Competences = competences
@@ -103,12 +104,9 @@ namespace CoursesApi.Repositories
 
             teacherToUpdate.FirstName = model.FirstName;
             teacherToUpdate.LastName = model.LastName;
-            teacherToUpdate.Address = new Address
-            {
-                Street = model.City,
-                ZipCode = model.ZipCode,
-                City = model.City
-            };
+            teacherToUpdate.Street = model.Street;
+            teacherToUpdate.ZipCode = model.ZipCode;
+            teacherToUpdate.City = model.City;
             teacherToUpdate.Email = model.Email;
             teacherToUpdate.PhoneNumber = model.PhoneNumber;
             teacherToUpdate.Competences = competences;

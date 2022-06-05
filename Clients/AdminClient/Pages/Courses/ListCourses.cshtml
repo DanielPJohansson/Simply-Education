@@ -1,0 +1,43 @@
+@page
+@model AdminClient.Pages.Courses.ListCourses
+
+@section styles {
+<link rel="stylesheet" href="~/css/list.css">
+}
+
+
+@{
+    ViewData["Title"] = "Admin - Courses";
+}
+
+<header>
+    <h1 class="page-title">Course administration</h1>
+</header>
+<section class="list-wrapper">
+    <a class="button" asp-page="/Courses/CreateCourse">Add new course</a>
+    <table>
+        <tr>
+            <th>Course Id</th>
+            <th>Course code</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Edit/Delete</th>
+        </tr>
+        @foreach (var course in Model.Courses)
+        {
+            <tr class="list-row">
+                <td>@course.CourseId</td>
+                <td>@course.CourseCode</td>
+                <td>@course.Name</td>
+                <td>@course.Category</td>
+                <td class="list-item-links">
+                    <a asp-page="/Courses/UpdateCourse" asp-route-id="@course.CourseId"
+                    class="fa-solid fa-pen-to-square"></a>
+                    <a asp-page="/Courses/ArchiveCourse" asp-route-id="@course.CourseId" class="fa-solid fa-trash"></a>
+                </td>
+            </tr>
+
+
+        }
+        </ul>
+</section>
