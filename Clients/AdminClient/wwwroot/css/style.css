@@ -118,3 +118,20 @@ button {
 .button:active {
   background-color: rgb(75, 75, 75);
 }
+
+.index-page-instructions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  max-width: 1000px;
+  background-color: white;
+  border: #333 solid 3px;
+}
+
+.index-page-instructions h2 {
+  margin: 2rem 1rem 1rem 1rem;
+}
+.index-page-instructions p {
+  margin: 1rem 2rem 2rem 2rem;
+}
