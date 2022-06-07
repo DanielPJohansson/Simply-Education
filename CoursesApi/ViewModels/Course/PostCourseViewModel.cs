@@ -5,6 +5,7 @@ namespace CoursesApi.ViewModels
     public class PostCourseViewModel
     {
         [Required(ErrorMessage = "Course code is required")]
+        [RegularExpression(@"^([0-9]{4})$", ErrorMessage = "The course code can only be a four digit code.")]
         public string? CourseCode { get; set; }
         [Required(ErrorMessage = "Course Name is required")]
         public string? Name { get; set; }
