@@ -12,7 +12,6 @@ namespace AdminClient.Pages.Courses
         [BindProperty]
         public IEnumerable<CourseViewModel> Courses { get; set; } = new List<CourseViewModel>();
 
-
         public ListCourses(IConfiguration config)
         {
             _config = config;

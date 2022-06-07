@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AdminClient.Pages.Students
 {
-    public class AddStudent : PageModel
+    public class CreateStudent : PageModel
     {
         private readonly IConfiguration _config;
         private readonly string _baseUrl;
@@ -12,17 +12,18 @@ namespace AdminClient.Pages.Students
         [BindProperty]
         public int StudentId { get; set; }
         [BindProperty]
-        public PostStudentViewModel Student { get; set; }
+        public PostStudentViewModel Student { get; set; } = new PostStudentViewModel();
+        [BindProperty]
+        public StatusMessage StatusMessage { get; set; } = new StatusMessage();
 
-        public AddStudent(IConfiguration config)
+        public CreateStudent(IConfiguration config)
         {
             _config = config;
             _baseUrl = _config.GetValue<string>("apiUrl");
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        public void OnGet()
         {
-            return Page();
         }
 
         public async Task OnPostAsync()
@@ -34,10 +35,16 @@ namespace AdminClient.Pages.Students
                 using var http = new HttpClient();
                 var response = await http.PostAsJsonAsync(url, Student);
 
-                if (!response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
+                {
+                    StatusMessage.Message = "Student successfully added.";
+                    StatusMessage.IsSuccess = true;
+                }
+                else
                 {
                     string reason = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine(reason);
+                    StatusMessage.Message = reason;
+                    StatusMessage.IsSuccess = false;
                 }
             }
         }

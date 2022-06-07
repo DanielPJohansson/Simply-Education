@@ -13,7 +13,11 @@
     <h1 class="page-title">Edit student</h1>
 </header>
 <section class="form-wrapper">
+    <partial name="_StatusMessage" for="StatusMessage" />
     <form class="form" method="post">
+        <div class="form-control">
+            <input type="hidden" asp-for="StudentId">
+        </div>
         <div class="form-control">
             <label asp-for="Student.FirstName"></label>
             <input class="form-field" asp-for="Student.FirstName" />

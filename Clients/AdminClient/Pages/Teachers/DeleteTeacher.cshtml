@@ -1,0 +1,36 @@
+@page
+@model AdminClient.Pages.Teachers.DeleteTeacher
+
+@section styles {
+<link rel="stylesheet" href="~/css/details.css">
+}
+
+@{
+    ViewData["Title"] = "Delete teacher";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<header>
+    <h1 class="page-title">Delete teacher</h1>
+</header>
+<section class="details-wrapper">
+    <h3>Are you sure you want to delete the following teacher?</h3>
+    <table>
+        <tr class="details-field">
+            <th>Name</th>
+            <td>@Model.Teacher.FirstName @Model.Teacher.LastName</td>
+        </tr>
+        <tr class="details-field">
+            <th>Email</th>
+            <td>@Model.Teacher.Email</td>
+        </tr>
+    </table>
+    <div class="buttons">
+        <form method="post">
+            <input type="hidden" asp-for="TeacherId">
+            <button class="button" type="submit" id="delete">Delete</button>
+        </form>
+        <a class="button" asp-page="/Teachers/ListTeachers">Cancel</a>
+    </div>
+</section>

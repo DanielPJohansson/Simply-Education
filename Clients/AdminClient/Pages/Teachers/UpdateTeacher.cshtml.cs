@@ -1,24 +1,89 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text.Json;
+using AdminClient.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using AdminClient.Services;
 
 namespace AdminClient.Pages.Teachers
 {
     public class UpdateTeacher : PageModel
     {
-        private readonly ILogger<UpdateTeacher> _logger;
+        private readonly IConfiguration _config;
+        private readonly string _baseUrl;
 
-        public UpdateTeacher(ILogger<UpdateTeacher> logger)
+        [BindProperty]
+        public int TeacherId { get; set; }
+        [BindProperty]
+        public PostTeacherViewModel Teacher { get; set; } = new PostTeacherViewModel();
+        [BindProperty]
+        public List<SelectListItem> Categories { get; set; } = new List<SelectListItem>();
+        [BindProperty]
+        public StatusMessage StatusMessage { get; set; } = new StatusMessage();
+
+        public UpdateTeacher(IConfiguration config)
         {
-            _logger = logger;
+            _config = config;
+            _baseUrl = _config.GetValue<string>("apiUrl");
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync(int id)
         {
+            TeacherId = id;
+
+            var teachersUrl = $"{_baseUrl}/teachers/{id}";
+
+            using var http = new HttpClient();
+
+            var teacherResponseModel = await http.GetFromJsonAsync<ResponseViewModel>(teachersUrl);
+
+            var teacherToUpdate = JsonSerializer.Deserialize<TeacherViewModel>(teacherResponseModel!.Data);
+
+            if (teacherToUpdate is not null)
+            {
+                Teacher = new PostTeacherViewModel
+                {
+                    FirstName = teacherToUpdate.FirstName,
+                    LastName = teacherToUpdate.LastName,
+                    Street = teacherToUpdate.Street,
+                    ZipCode = teacherToUpdate.ZipCode,
+                    City = teacherToUpdate.City,
+                    Email = teacherToUpdate.Email,
+                    PhoneNumber = teacherToUpdate.PhoneNumber,
+                    Competences = teacherToUpdate.Competences
+                };
+            }
+
+            var selectListBuilder = new SelectListBuilder(_baseUrl);
+            Categories = await selectListBuilder.PopulateCategorySelectListAsync();
+
+            return Page();
+        }
+
+        public async Task OnPostAsync()
+        {
+            if (ModelState.IsValid)
+            {
+                var url = $"{_baseUrl}/teachers/{TeacherId}";
+
+                using var http = new HttpClient();
+                var response = await http.PutAsJsonAsync(url, Teacher);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    StatusMessage.Message = "Teacher information updated.";
+                    StatusMessage.IsSuccess = true;
+                }
+                else
+                {
+                    string reason = await response.Content.ReadAsStringAsync();
+                    StatusMessage.Message = reason;
+                    StatusMessage.IsSuccess = false;
+                }
+            }
+
+            var selectListBuilder = new SelectListBuilder(_baseUrl);
+            Categories = await selectListBuilder.PopulateCategorySelectListAsync();
         }
     }
 }

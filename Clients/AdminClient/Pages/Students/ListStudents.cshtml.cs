@@ -3,7 +3,7 @@ using AdminClient.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace AdminClient.Pages.Courses
+namespace AdminClient.Pages.Students
 {
     public class ListStudents : PageModel
     {

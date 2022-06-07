@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "miJUkwadv2IEPn4LTcfv2VFk4GbUHstmY4U6cMhUwLA=",
+  "Hash": "iibXfGK0IHZZYEDlbkGddagO8DhJXVq/3+GjH1OymSM=",
   "Source": "AdminClient",
   "BasePath": "_content/AdminClient",
   "Mode": "Default",
@@ -151,6 +151,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\Repos\\Web\\Simply-Education\\Clients\\AdminClient\\wwwroot\\js\\statusMessage.js",
+      "SourceId": "AdminClient",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Repos\\Web\\Simply-Education\\Clients\\AdminClient\\wwwroot\\",
+      "BasePath": "_content/AdminClient",
+      "RelativePath": "js/statusMessage.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\statusMessage.js"
     },
     {
       "Identity": "D:\\Repos\\Web\\Simply-Education\\Clients\\AdminClient\\wwwroot\\tinyMce\\icons\\default\\icons.min.js",

@@ -11,7 +11,8 @@ namespace AdminClient.Pages.Courses
 
         [BindProperty]
         public IEnumerable<TeacherViewModel> Teachers { get; set; } = new List<TeacherViewModel>();
-
+        [BindProperty(SupportsGet = true)]
+        public string? SearchString { get; set; }
 
         public ListTeachers(IConfiguration config)
         {
@@ -21,7 +22,8 @@ namespace AdminClient.Pages.Courses
         public async Task OnGetAsync()
         {
             var baseUrl = _config.GetValue<string>("apiUrl");
-            var url = $"{baseUrl}/teachers/list";
+
+            var url = String.IsNullOrEmpty(SearchString) ? $"{baseUrl}/teachers/list" : $"{baseUrl}/teachers/category/{SearchString}";
 
             using var http = new HttpClient();
             var responseModel = await http.GetFromJsonAsync<ResponseViewModel>(url);

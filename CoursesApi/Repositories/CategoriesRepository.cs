@@ -40,7 +40,7 @@ namespace CoursesApi.Repositories
 
         public async Task<CategoryWithTeachersViewModel?> GetTeachersInCategoryAsync(int id)
         {
-            var courses = await _context.Categories.Where(cat => cat.Id == id).Include(cat => cat.Courses).Select(cat => new CategoryWithTeachersViewModel
+            var courses = await _context.Categories.Where(cat => cat.Id == id).Include(cat => cat.Teachers).Select(cat => new CategoryWithTeachersViewModel
             {
                 CategoryId = cat.Id,
                 CategoryName = cat.Name,

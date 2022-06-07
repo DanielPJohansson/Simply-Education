@@ -1,23 +1,20 @@
 @page
-@model AdminClient.Pages.Teachers.UpdateTeacher
+@model AdminClient.Pages.Teachers.CreateTeacher
 
 @section styles {
 <link rel="stylesheet" href="~/css/form.css">
 }
 
 @{
-    ViewData["Title"] = "Edit teacher";
+    ViewData["Title"] = "Add teacher";
 }
 
 <header>
-    <h1 class="page-title">Edit teacher</h1>
+    <h1 class="page-title">Add teacher</h1>
 </header>
 <section class="form-wrapper">
     <partial name="_StatusMessage" for="StatusMessage" />
     <form class="form" method="post">
-        <div>
-            <input type="hidden" asp-for="TeacherId">
-        </div>
         <div class="form-control">
             <label asp-for="Teacher.FirstName"></label>
             <input class="form-field" asp-for="Teacher.FirstName" />

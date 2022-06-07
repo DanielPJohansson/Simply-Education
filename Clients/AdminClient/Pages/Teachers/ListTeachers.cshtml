@@ -3,6 +3,7 @@
 
 @section styles {
 <link rel="stylesheet" href="~/css/list.css">
+<link rel="stylesheet" href="~/css/form.css">
 }
 
 
@@ -15,21 +16,27 @@
 </header>
 <section class="list-wrapper">
     <a class="button" asp-page="/Teachers/AddTeacher">Add new teacher</a>
+    <form>
+        <p>
+            Competence: <input class="form-field" type="text" asp-for="SearchString" />
+            <button class="button" type="submit">Filter</button>
+        </p>
+    </form>
     <table>
         <tr>
-            <th>Id</th>
+            <th class="large-screen-only">Id</th>
             <th>Name</th>
             <th>Email address</th>
-            <th>Phone number</th>
+            <th class="large-screen-only">Phone number</th>
             <th>Edit/Delete</th>
         </tr>
         @foreach (var teacher in Model.Teachers)
         {
             <tr class="list-row">
-                <td>@teacher.Id</td>
+                <td class="large-screen-only">@teacher.Id</td>
                 <td>@teacher.FirstName @teacher.LastName</td>
                 <td>@teacher.Email</td>
-                <td>@teacher.PhoneNumber</td>
+                <td class="large-screen-only">@teacher.PhoneNumber</td>
                 <td class="list-item-links">
                     <a asp-page="/Teachers/UpdateTeacher" asp-route-id="@teacher.Id" class="fa-solid fa-pen-to-square"></a>
                     <a asp-page="/Teachers/DeleteTeacher" asp-route-id="@teacher.Id" class="fa-solid fa-user-minus"></a>

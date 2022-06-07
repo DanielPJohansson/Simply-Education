@@ -1,0 +1,14 @@
+@using AdminClient.ViewModels
+
+@model StatusMessage
+
+@if (!String.IsNullOrEmpty(Model.Message))
+{
+    string type = Model.IsSuccess ? "success" : "error";
+
+    <div id="message" class="message @type">
+        @Model.Message
+        <button type="button" id="close" class="close-btn fa-solid fa-square-xmark"></button>
+    </div>
+    <script src="~/js/statusMessage.js"></script>
+}

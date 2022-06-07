@@ -17,27 +17,25 @@
     <a class="button" asp-page="/Courses/CreateCourse">Add new course</a>
     <table>
         <tr>
-            <th>Course Id</th>
+            <th class="large-screen-only">Course Id</th>
             <th>Course code</th>
             <th>Name</th>
-            <th>Category</th>
+            <th class="large-screen-only">Category</th>
             <th>Edit/Delete</th>
         </tr>
         @foreach (var course in Model.Courses)
         {
             <tr class="list-row">
-                <td>@course.CourseId</td>
+                <td class="large-screen-only">@course.CourseId</td>
                 <td>@course.CourseCode</td>
                 <td>@course.Name</td>
-                <td>@course.Category</td>
+                <td class="large-screen-only">@course.Category</td>
                 <td class="list-item-links">
                     <a asp-page="/Courses/UpdateCourse" asp-route-id="@course.CourseId"
                     class="fa-solid fa-pen-to-square"></a>
-                    <a asp-page="/Courses/ArchiveCourse" asp-route-id="@course.CourseId" class="fa-solid fa-trash"></a>
+                    <a asp-page="/Courses/DeleteCourse" asp-route-id="@course.CourseId" class="fa-solid fa-trash"></a>
                 </td>
             </tr>
-
-
         }
         </ul>
 </section>

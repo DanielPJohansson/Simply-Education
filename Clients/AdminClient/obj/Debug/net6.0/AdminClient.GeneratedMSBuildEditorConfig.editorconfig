@@ -19,6 +19,10 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xDcmVhdGVDb3Vyc2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Repos/Web/Simply-Education/Clients/AdminClient/Pages/Courses/DeleteCourse.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xEZWxldGVDb3Vyc2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Repos/Web/Simply-Education/Clients/AdminClient/Pages/Courses/ListCourses.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xMaXN0Q291cnNlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -39,12 +43,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Repos/Web/Simply-Education/Clients/AdminClient/Pages/Shared/_StatusMessage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9TdGF0dXNNZXNzYWdlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Repos/Web/Simply-Education/Clients/AdminClient/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repos/Web/Simply-Education/Clients/AdminClient/Pages/Students/AddStudent.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3R1ZGVudHNcQWRkU3R1ZGVudC5jc2h0bWw=
+[D:/Repos/Web/Simply-Education/Clients/AdminClient/Pages/Students/CreateStudent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3R1ZGVudHNcQ3JlYXRlU3R1ZGVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Repos/Web/Simply-Education/Clients/AdminClient/Pages/Students/DeleteStudent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3R1ZGVudHNcRGVsZXRlU3R1ZGVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Repos/Web/Simply-Education/Clients/AdminClient/Pages/Students/ListStudents.cshtml]
@@ -55,8 +67,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3R1ZGVudHNcVXBkYXRlU3R1ZGVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repos/Web/Simply-Education/Clients/AdminClient/Pages/Teachers/AddTeacher.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVhY2hlcnNcQWRkVGVhY2hlci5jc2h0bWw=
+[D:/Repos/Web/Simply-Education/Clients/AdminClient/Pages/Teachers/CreateTeacher.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVhY2hlcnNcQ3JlYXRlVGVhY2hlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Repos/Web/Simply-Education/Clients/AdminClient/Pages/Teachers/DeleteTeacher.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVhY2hlcnNcRGVsZXRlVGVhY2hlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Repos/Web/Simply-Education/Clients/AdminClient/Pages/Teachers/ListTeachers.cshtml]

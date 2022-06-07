@@ -1,5 +1,5 @@
 @page
-@model AdminClient.Pages.Students.AddStudent
+@model AdminClient.Pages.Students.CreateStudent
 
 @section styles {
 <link rel="stylesheet" href="~/css/form.css">
@@ -13,6 +13,7 @@
     <h1 class="page-title">Add new student</h1>
 </header>
 <section class="form-wrapper">
+    <partial name="_StatusMessage" for="StatusMessage" />
     <form class="form" method="post">
         <div class="form-control">
             <label asp-for="Student.FirstName"></label>

@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 4rem 2rem;
+  margin: 1rem 2rem;
   padding: 1rem 3rem 3rem 3rem;
   background-color: white;
   border-radius: 5px;
@@ -35,10 +35,41 @@
 }
 
 .button {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 .error-field {
   color: rgb(230, 72, 72);
   margin-top: 0.3rem;
+}
+.message {
+  position: relative;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.5rem;
+}
+
+.error {
+  background-color: rgb(219, 105, 105);
+  border: rgb(207, 86, 86) 2px solid;
+}
+
+.success {
+  background-color: rgb(105, 219, 105);
+  border: rgb(86, 207, 92) 2px solid;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.3rem;
+  background: none;
+  font-size: 1.4rem;
+  color: #333;
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
 }

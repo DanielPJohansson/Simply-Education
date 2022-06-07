@@ -13,7 +13,9 @@ namespace AdminClient.Pages.Students
         [BindProperty]
         public int StudentId { get; set; }
         [BindProperty]
-        public PostStudentViewModel Student { get; set; }
+        public PostStudentViewModel Student { get; set; } = new PostStudentViewModel();
+        [BindProperty]
+        public StatusMessage StatusMessage { get; set; } = new StatusMessage();
 
         public UpdateStudent(IConfiguration config)
         {
@@ -23,26 +25,28 @@ namespace AdminClient.Pages.Students
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
+            StudentId = id;
             var coursesUrl = $"{_baseUrl}/students/{id}";
 
             using var http = new HttpClient();
 
             var responseModel = await http.GetFromJsonAsync<ResponseViewModel>(coursesUrl);
-            var studentToUpdate = JsonSerializer.Deserialize<StudentViewModel>(responseModel.Data);
 
+            var studentToUpdate = JsonSerializer.Deserialize<StudentViewModel>(responseModel!.Data);
 
-            StudentId = studentToUpdate.Id;
-
-            Student = new PostStudentViewModel
+            if (studentToUpdate is not null)
             {
-                FirstName = studentToUpdate.FirstName,
-                LastName = studentToUpdate.LastName,
-                Street = studentToUpdate.Street,
-                ZipCode = studentToUpdate.ZipCode,
-                City = studentToUpdate.City,
-                Email = studentToUpdate.Email,
-                PhoneNumber = studentToUpdate.PhoneNumber,
-            };
+                Student = new PostStudentViewModel
+                {
+                    FirstName = studentToUpdate.FirstName,
+                    LastName = studentToUpdate.LastName,
+                    Street = studentToUpdate.Street,
+                    ZipCode = studentToUpdate.ZipCode,
+                    City = studentToUpdate.City,
+                    Email = studentToUpdate.Email,
+                    PhoneNumber = studentToUpdate.PhoneNumber,
+                };
+            }
 
             return Page();
         }
@@ -56,10 +60,16 @@ namespace AdminClient.Pages.Students
                 using var http = new HttpClient();
                 var response = await http.PutAsJsonAsync(url, Student);
 
-                if (!response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
+                {
+                    StatusMessage.Message = "Student information updated.";
+                    StatusMessage.IsSuccess = true;
+                }
+                else
                 {
                     string reason = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine(reason);
+                    StatusMessage.Message = reason;
+                    StatusMessage.IsSuccess = false;
                 }
             }
         }

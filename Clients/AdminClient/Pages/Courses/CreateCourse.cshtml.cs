@@ -1,4 +1,5 @@
 using System.Text.Json;
+using AdminClient.Services;
 using AdminClient.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,9 +13,11 @@ namespace AdminClient.Pages.Courses
         private readonly string _baseUrl;
 
         [BindProperty]
-        public PostCourseViewModel Course { get; set; }
+        public PostCourseViewModel Course { get; set; } = new PostCourseViewModel();
         [BindProperty]
-        public List<SelectListItem> Categories { get; set; }
+        public List<SelectListItem> Categories { get; set; } = new List<SelectListItem>();
+        [BindProperty]
+        public StatusMessage StatusMessage { get; set; } = new StatusMessage();
 
         public CreateCourse(IConfiguration config)
         {
@@ -24,18 +27,8 @@ namespace AdminClient.Pages.Courses
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var categoriesUrl = $"{_baseUrl}/categories/list";
-
-            using var http = new HttpClient();
-
-            var responseModel = await http.GetFromJsonAsync<ResponseViewModel>(categoriesUrl);
-            var categories = JsonSerializer.Deserialize<IEnumerable<CategoryViewModel>>(responseModel.Data);
-
-            Categories = categories.Select(cat => new SelectListItem
-            {
-                Value = cat.Name,
-                Text = cat.Name
-            }).ToList();
+            var selectListBuilder = new SelectListBuilder(_baseUrl);
+            Categories = await selectListBuilder.PopulateCategorySelectListAsync();
 
             return Page();
         }
@@ -49,12 +42,21 @@ namespace AdminClient.Pages.Courses
                 using var http = new HttpClient();
                 var response = await http.PostAsJsonAsync(url, Course);
 
-                if (!response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
+                {
+                    StatusMessage.Message = "Course successfully added.";
+                    StatusMessage.IsSuccess = true;
+                }
+                else
                 {
                     string reason = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine(reason);
+                    StatusMessage.Message = reason;
+                    StatusMessage.IsSuccess = false;
                 }
             }
+
+            var selectListBuilder = new SelectListBuilder(_baseUrl);
+            Categories = await selectListBuilder.PopulateCategorySelectListAsync();
         }
     }
 }

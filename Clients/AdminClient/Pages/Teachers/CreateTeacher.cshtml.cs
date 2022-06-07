@@ -5,23 +5,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace AdminClient.Pages.Courses
+namespace AdminClient.Pages.Teachers
 {
-    public class UpdateCourse : PageModel
+    public class CreateTeacher : PageModel
     {
         private readonly IConfiguration _config;
         private readonly string _baseUrl;
 
         [BindProperty]
-        public int CourseId { get; set; }
-        [BindProperty]
-        public PostCourseViewModel Course { get; set; } = new PostCourseViewModel();
+        public PostTeacherViewModel Teacher { get; set; } = new PostTeacherViewModel();
         [BindProperty]
         public List<SelectListItem> Categories { get; set; } = new List<SelectListItem>();
         [BindProperty]
         public StatusMessage StatusMessage { get; set; } = new StatusMessage();
 
-        public UpdateCourse(IConfiguration config)
+        public CreateTeacher(IConfiguration config)
         {
             _config = config;
             _baseUrl = _config.GetValue<string>("apiUrl");
@@ -29,28 +27,6 @@ namespace AdminClient.Pages.Courses
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            CourseId = id;
-            var coursesUrl = $"{_baseUrl}/courses/{id}";
-
-            using var http = new HttpClient();
-
-            var responseModel = await http.GetFromJsonAsync<ResponseViewModel>(coursesUrl);
-            var courseToUpdate = JsonSerializer.Deserialize<CourseViewModel>(responseModel!.Data);
-
-            if (courseToUpdate is not null)
-            {
-                Course = new PostCourseViewModel
-                {
-                    CourseCode = courseToUpdate.CourseCode,
-                    Name = courseToUpdate.Name,
-                    DurationInHours = courseToUpdate.DurationInHours,
-                    Category = courseToUpdate.Category,
-                    ImageUrl = courseToUpdate.ImageUrl,
-                    Description = courseToUpdate.Description,
-                    Details = courseToUpdate.Details,
-                };
-            }
-
             var selectListBuilder = new SelectListBuilder(_baseUrl);
             Categories = await selectListBuilder.PopulateCategorySelectListAsync();
 
@@ -61,14 +37,14 @@ namespace AdminClient.Pages.Courses
         {
             if (ModelState.IsValid)
             {
-                var url = $"{_baseUrl}/courses/{CourseId}";
+                var url = $"{_baseUrl}/teachers/";
 
                 using var http = new HttpClient();
-                var response = await http.PutAsJsonAsync(url, Course);
+                var response = await http.PostAsJsonAsync(url, Teacher);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    StatusMessage.Message = "Course information updated.";
+                    StatusMessage.Message = "Teacher successfully added.";
                     StatusMessage.IsSuccess = true;
                 }
                 else

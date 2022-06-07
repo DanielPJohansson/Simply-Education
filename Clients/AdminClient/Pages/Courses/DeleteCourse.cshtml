@@ -1,0 +1,38 @@
+@page
+@model AdminClient.Pages.Courses.DeleteCourse
+
+@section styles {
+<link rel="stylesheet" href="~/css/details.css">
+}
+
+@{
+    ViewData["Title"] = "Delete course";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<header>
+    <h1 class="page-title">Delete course</h1>
+</header>
+<section class="details-wrapper">
+    <h3>Are you sure you want to delete the following course?</h3>
+    <p>The following action will set the course as deprecated. The course will not be listed in the admin or user
+        client.</p>
+    <table>
+        <tr class="details-field">
+            <th>Course code</th>
+            <td>@Model.Course.CourseCode</td>
+        </tr>
+        <tr class="details-field">
+            <th>Course name</th>
+            <td>@Model.Course.Name</td>
+        </tr>
+    </table>
+    <div class="buttons">
+        <form method="post">
+            <input type="hidden" asp-for="CourseId">
+            <button class="button" type="submit" id="delete">Delete</button>
+        </form>
+        <a class="button" asp-page="/Courses/ListCourses">Cancel</a>
+    </div>
+</section>

@@ -45,13 +45,13 @@ function filterByCategory(categoryName) {
     courses.forEach((course) => {
       createGalleryCardHtml(course);
     });
+  } else {
+    courses.forEach((course) => {
+      if (course.Category.toLowerCase() === categoryName.toLowerCase()) {
+        createGalleryCardHtml(course);
+      }
+    });
   }
-
-  courses.forEach((course) => {
-    if (course.Category.toLowerCase() === categoryName.toLowerCase()) {
-      createGalleryCardHtml(course);
-    }
-  });
 }
 
 function createGalleryCardHtml(course) {

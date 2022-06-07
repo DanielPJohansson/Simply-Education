@@ -27,6 +27,27 @@ namespace CoursesApi.Repositories
             }).ToListAsync();
         }
 
+        public async Task<IEnumerable<TeacherViewModel>?> GetTeachersAsync(string categoryName)
+        {
+            var teachers = await _context.Teachers
+            .Include(t => t.Competences)
+            .Where(t => t.Competences.Any(c => c.Name.ToLower().Contains(categoryName.ToLower())))
+            .Select(t => new TeacherViewModel
+            {
+                Id = t.Id,
+                FirstName = t.FirstName,
+                LastName = t.LastName,
+                Street = t.Street,
+                ZipCode = t.ZipCode,
+                City = t.City,
+                Email = t.Email,
+                PhoneNumber = t.PhoneNumber
+            })
+            .ToListAsync();
+
+            return teachers;
+        }
+
         public async Task<TeacherViewModel?> GetTeacherAsync(int id)
         {
             return await _context.Teachers.Where(t => t.Id == id).Include(t => t.Competences).Select(t => new TeacherViewModel
@@ -42,6 +63,8 @@ namespace CoursesApi.Repositories
                 Competences = t.Competences.Select(c => c.Name).ToList()
             }).SingleOrDefaultAsync();
         }
+
+
 
         public async Task AddTeacherAsync(PostTeacherViewModel model)
         {

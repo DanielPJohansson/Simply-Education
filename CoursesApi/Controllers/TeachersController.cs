@@ -29,6 +29,21 @@ namespace CoursesApi.Controllers
                 data: JsonSerializer.Serialize(response)));
         }
 
+        [HttpGet("category/{name}")]
+        public async Task<ActionResult> GetTeacher(string name)
+        {
+            var response = await _repository.GetTeachersAsync(name);
+
+            if (response is null)
+            {
+                return NotFound($"Could not find teachers matching category: {name}");
+            }
+
+            return Ok(new ResponseViewModel(
+                statusCode: 200,
+                data: JsonSerializer.Serialize(response)));
+        }
+
         [HttpGet("list")]
         public async Task<ActionResult> GetTeachers()
         {
