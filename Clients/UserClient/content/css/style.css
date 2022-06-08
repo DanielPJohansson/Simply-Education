@@ -97,9 +97,6 @@ button {
   margin-right: 0.5rem;
 }
 
-.filter-wrapper {
-}
-
 .filter-wrapper label {
   font-size: 1.2rem;
   font-weight: 800;
@@ -120,4 +117,38 @@ button {
 
 .button:active {
   background-color: rgb(75, 75, 75);
+}
+
+.index-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.index-page header {
+  display: flex;
+  justify-content: center;
+  background-image: url("../images/library.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 700px;
+}
+
+.index-page header h1 {
+  color: whitesmoke;
+  text-shadow: #333 0px 0px 5px;
+  font-size: 5rem;
+}
+
+.index-page header h2 {
+  color: whitesmoke;
+  text-shadow: #333 0px 0px 5px;
+  font-size: 2rem;
+  margin-top: 1rem;
+}
+
+.index-page-content {
+  width: 90%;
+  max-width: 1000px;
+  margin: 2rem 0rem;
 }

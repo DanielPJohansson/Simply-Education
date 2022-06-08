@@ -2,13 +2,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AdminClient.ViewModels
 {
-    public class PostCourseViewModel
+    public class UpdateCourseViewModel
     {
         [Display(Name = "Course code")]
-        [RegularExpression(@"^([0-9]{4})$", ErrorMessage = "The course code can only be a four digit code.")]
-        [Required(ErrorMessage = "Course code is required")]
         public string? CourseCode { get; set; }
-        [Required(ErrorMessage = "Course Name is required")]
         public string? Name { get; set; }
         [Display(Name = "Duration in hours")]
         [Required(ErrorMessage = "Course duration is required")]

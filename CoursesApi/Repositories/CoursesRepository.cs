@@ -1,3 +1,5 @@
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using CoursesApi.Data;
 using CoursesApi.Models;
 
@@ -6,8 +8,10 @@ namespace CoursesApi.Repositories
     public class CoursesRepository : ICoursesRepository
     {
         private readonly DataContext _context;
-        public CoursesRepository(DataContext context)
+        private readonly IMapper _mapper;
+        public CoursesRepository(DataContext context, IMapper mapper)
         {
+            _mapper = mapper;
             _context = context;
         }
 
@@ -16,17 +20,7 @@ namespace CoursesApi.Repositories
             return await _context.Courses.Where(c => c.Id == id)
             .Include(c => c.Category)
             .Include(c => c.Teachers)
-            .Select(c => new CourseViewModel
-            {
-                CourseId = c.Id,
-                CourseCode = c.CourseCode,
-                Name = c.Name,
-                DurationInHours = c.DurationInHours,
-                Category = c.Category.Name,
-                ImageUrl = c.ImageUrl,
-                Description = c.Description,
-                Details = c.Details
-            })
+            .ProjectTo<CourseViewModel>(_mapper.ConfigurationProvider)
             .SingleOrDefaultAsync();
         }
 
@@ -36,17 +30,8 @@ namespace CoursesApi.Repositories
             .Include(c => c.Category)
             .Include(c => c.Teachers)
             .OrderBy(c => c.CourseCode)
-            .Select(c => new CourseViewModel
-            {
-                CourseId = c.Id,
-                CourseCode = c.CourseCode,
-                Name = c.Name,
-                DurationInHours = c.DurationInHours,
-                Category = c.Category.Name,
-                ImageUrl = c.ImageUrl,
-                Description = c.Description,
-                Details = c.Details
-            }).ToListAsync();
+            .ProjectTo<CourseViewModel>(_mapper.ConfigurationProvider)
+            .ToListAsync();
         }
         public async Task<IEnumerable<CategoryViewModel>> GetCategoriesForActiveCoursesAsync()
         {
@@ -61,6 +46,69 @@ namespace CoursesApi.Repositories
                         .Distinct()
                         .ToListAsync();
         }
+
+        public async Task AddCourseAsync(PostCourseViewModel model)
+        {
+            if (await _context.Courses.AnyAsync(c => c.CourseCode == model.CourseCode))
+            {
+                throw new Exception($"Course with course code {model.CourseCode} already exists.");
+            }
+
+            var category = await _context.Categories.SingleOrDefaultAsync(cat => cat.Name.ToLower() == model.Category!.ToLower());
+
+            if (category is null)
+            {
+                throw new Exception($"The category {model.Category!.ToLower()} already exists.");
+            }
+
+            var courseToAdd = _mapper.Map<Course>(model);
+            courseToAdd.Category = category;
+
+            await _context.Courses.AddAsync(courseToAdd);
+        }
+
+        public async Task UpdateCourseAsync(int id, UpdateCourseViewModel model)
+        {
+            var courseToUpdate = await _context.Courses.SingleOrDefaultAsync(c => c.Id == id);
+
+            if (courseToUpdate is null)
+            {
+                throw new Exception($"Could not find course with Id: {id}");
+            }
+
+            var category = await _context.Categories.SingleOrDefaultAsync(cat => cat.Name.ToLower() == model.Category!.ToLower());
+
+            if (category is null)
+            {
+                throw new Exception($"The category {model.Category!.ToLower()} already exists.");
+            }
+
+            _mapper.Map<UpdateCourseViewModel, Course>(model, courseToUpdate);
+
+            courseToUpdate.Category = category;
+
+            _context.Courses.Update(courseToUpdate);
+        }
+
+        public async Task ArchiveCourseAsync(int id)
+        {
+            var courseToArchive = await _context.Courses.SingleOrDefaultAsync(c => c.Id == id);
+
+            if (courseToArchive is null)
+            {
+                throw new Exception($"Could not find course with Id: {id}");
+            }
+
+            courseToArchive.IsDeprecated = true;
+            _context.Courses.Update(courseToArchive);
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        #region Teacher and students in course management
 
         public async Task<CourseWithStudentsAndTeachersViewModel?> GetCourseWithStudentsAndTeachersAsync(int courseId)
         {
@@ -90,35 +138,6 @@ namespace CoursesApi.Repositories
                     Email = t.User.Email
                 }).ToList()
             }).SingleOrDefaultAsync();
-        }
-
-
-        public async Task AddCourseAsync(PostCourseViewModel model)
-        {
-            if (await _context.Courses.AnyAsync(c => c.CourseCode == model.CourseCode))
-            {
-                throw new Exception($"Course with course code {model.CourseCode} already exists.");
-            }
-
-            var category = await _context.Categories.SingleOrDefaultAsync(cat => cat.Name.ToLower() == model.Category!.ToLower());
-
-            if (category is null)
-            {
-                throw new Exception($"The category {model.Category!.ToLower()} already exists.");
-            }
-
-            var courseToAdd = new Course
-            {
-                CourseCode = model.CourseCode,
-                Name = model.Name,
-                DurationInHours = model.DurationInHours,
-                Description = model.Description,
-                ImageUrl = model.ImageUrl,
-                Details = model.Details,
-                Category = category
-            };
-
-            await _context.Courses.AddAsync(courseToAdd);
         }
 
         public async Task AddTeacherToCourseAsync(PostTeacherToCourseViewModel model)
@@ -172,46 +191,6 @@ namespace CoursesApi.Repositories
             await _context.StudentCourses.AddAsync(studentCourse);
         }
 
-        public async Task UpdateCourseAsync(int id, PostCourseViewModel model)
-        {
-            var courseToUpdate = await _context.Courses.SingleOrDefaultAsync(c => c.Id == id);
-
-            if (courseToUpdate is null)
-            {
-                throw new Exception($"Could not find course with Id: {id}");
-            }
-
-            var category = await _context.Categories.SingleOrDefaultAsync(cat => cat.Name.ToLower() == model.Category!.ToLower());
-
-            if (category is null)
-            {
-                throw new Exception($"The category {model.Category!.ToLower()} already exists.");
-            }
-
-            courseToUpdate.CourseCode = model.CourseCode;
-            courseToUpdate.Name = model.Name;
-            courseToUpdate.DurationInHours = model.DurationInHours;
-            courseToUpdate.Description = model.Description;
-            courseToUpdate.Details = model.Details;
-            courseToUpdate.ImageUrl = model.ImageUrl;
-            courseToUpdate.Category = category;
-
-            _context.Courses.Update(courseToUpdate);
-        }
-
-        public async Task ArchiveCourseAsync(int id)
-        {
-            var courseToArchive = await _context.Courses.SingleOrDefaultAsync(c => c.Id == id);
-
-            if (courseToArchive is null)
-            {
-                throw new Exception($"Could not find course with Id: {id}");
-            }
-
-            courseToArchive.IsDeprecated = true;
-            _context.Courses.Update(courseToArchive);
-        }
-
         public async Task RemoveTeacherFromCourseAsync(int courseId, int teacherId)
         {
             var course = await _context.Courses.Include(c => c.Teachers).SingleOrDefaultAsync(c => c.Id == courseId);
@@ -263,9 +242,6 @@ namespace CoursesApi.Repositories
             _context.StudentCourses.Update(studentCourseToRemove);
         }
 
-        public async Task<bool> SaveChangesAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
-        }
+        #endregion
     }
 }

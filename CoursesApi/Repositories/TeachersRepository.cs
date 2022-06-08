@@ -1,5 +1,7 @@
 using System.Security.Claims;
 using System.Text;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using CoursesApi.Data;
 using CoursesApi.Models;
 using Microsoft.AspNetCore.Identity;
@@ -10,8 +12,10 @@ namespace CoursesApi.Repositories
     {
         private readonly DataContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        public TeachersRepository(DataContext context, UserManager<ApplicationUser> userManager)
+        private readonly IMapper _mapper;
+        public TeachersRepository(DataContext context, IMapper mapper, UserManager<ApplicationUser> userManager)
         {
+            _mapper = mapper;
             _userManager = userManager;
             _context = context;
         }
@@ -20,40 +24,18 @@ namespace CoursesApi.Repositories
         {
             return await _context.Teachers
             .Include(t => t.User)
-            .Select(t => new TeacherViewModel
-            {
-                Id = t.Id,
-                FirstName = t.User!.FirstName,
-                LastName = t.User.LastName,
-                Street = t.User.Street,
-                ZipCode = t.User.ZipCode,
-                City = t.User.City,
-                Email = t.User.Email,
-                PhoneNumber = t.User.PhoneNumber,
-                Competences = t.Competences.Select(c => c.Name).ToList()
-            }).ToListAsync();
+            .ProjectTo<TeacherViewModel>(_mapper.ConfigurationProvider)
+            .ToListAsync();
         }
 
         public async Task<IEnumerable<TeacherViewModel>?> GetTeachersAsync(string categoryName)
         {
-            var teachers = await _context.Teachers
+            return await _context.Teachers
             .Include(t => t.User)
             .Include(t => t.Competences)
             .Where(t => t.Competences.Any(c => c.Name.ToLower().Contains(categoryName.ToLower())))
-            .Select(t => new TeacherViewModel
-            {
-                Id = t.Id,
-                FirstName = t.User!.FirstName,
-                LastName = t.User.LastName,
-                Street = t.User.Street,
-                ZipCode = t.User.ZipCode,
-                City = t.User.City,
-                Email = t.User.Email,
-                PhoneNumber = t.User.PhoneNumber
-            })
+            .ProjectTo<TeacherViewModel>(_mapper.ConfigurationProvider)
             .ToListAsync();
-
-            return teachers;
         }
 
         public async Task<TeacherViewModel?> GetTeacherAsync(int id)
@@ -61,18 +43,8 @@ namespace CoursesApi.Repositories
             return await _context.Teachers.Where(t => t.Id == id)
             .Include(t => t.User)
             .Include(t => t.Competences)
-            .Select(t => new TeacherViewModel
-            {
-                Id = t.Id,
-                FirstName = t.User!.FirstName,
-                LastName = t.User.LastName,
-                Street = t.User.Street,
-                ZipCode = t.User.ZipCode,
-                City = t.User.City,
-                Email = t.User.Email,
-                PhoneNumber = t.User.PhoneNumber,
-                Competences = t.Competences.Select(c => c.Name).ToList()
-            }).SingleOrDefaultAsync();
+            .ProjectTo<TeacherViewModel>(_mapper.ConfigurationProvider)
+            .SingleOrDefaultAsync();
         }
 
 
@@ -98,31 +70,21 @@ namespace CoursesApi.Repositories
                 competences.Add(category);
             }
 
-            var user = new ApplicationUser
-            {
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Street = model.Street,
-                ZipCode = model.ZipCode,
-                City = model.City,
-                PhoneNumber = model.PhoneNumber,
-                Email = model.Email,
-                UserName = model.Email
-            };
+            var userToAdd = _mapper.Map<ApplicationUser>(model);
 
             var teacherToAdd = new Teacher
             {
-                User = user,
+                User = userToAdd,
                 Competences = competences
             };
 
-            var result = await _userManager.CreateAsync(user, model.Password);
+            var result = await _userManager.CreateAsync(userToAdd, model.Password);
 
             if (result.Succeeded)
             {
-                await _userManager.AddClaimsAsync(user, new List<Claim>()
+                await _userManager.AddClaimsAsync(userToAdd, new List<Claim>()
                 {
-                    new Claim(ClaimTypes.Email, user.Email!),
+                    new Claim(ClaimTypes.Email, userToAdd.Email!),
                     new Claim("Teacher", "true")
                 });
 
@@ -167,16 +129,11 @@ namespace CoursesApi.Repositories
                 competences.Add(category);
             }
 
-            var user = teacherToUpdate.User;
-
-            user!.Street = model.Street;
-            user.ZipCode = model.ZipCode;
-            user.City = model.City;
-            user.PhoneNumber = model.PhoneNumber;
+            var userToUpdate = _mapper.Map<UpdateTeacherViewModel, ApplicationUser>(model, teacherToUpdate.User!);
 
             teacherToUpdate.Competences = competences;
 
-            _context.People.Update(user);
+            _context.People.Update(userToUpdate);
             _context.Teachers.Update(teacherToUpdate);
         }
 

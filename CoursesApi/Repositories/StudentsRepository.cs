@@ -22,19 +22,6 @@ namespace CoursesApi.Repositories
 
         public async Task<IEnumerable<StudentViewModel>> GetStudentsAsync()
         {
-            // return await _context.Students.Include(s => s.User)
-            // .Select(s => new StudentViewModel
-            // {
-            //     Id = s.Id,
-            //     FirstName = s.User!.FirstName,
-            //     LastName = s.User.LastName,
-            //     Street = s.User.Street,
-            //     ZipCode = s.User.ZipCode,
-            //     City = s.User.City,
-            //     Email = s.User.Email,
-            //     PhoneNumber = s.User.PhoneNumber
-            // })
-            // .ToListAsync();
             return await _context.Students.Include(s => s.User).ProjectTo<StudentViewModel>(_mapper.ConfigurationProvider).ToListAsync();
         }
 
@@ -44,19 +31,6 @@ namespace CoursesApi.Repositories
             .Include(s => s.User)
             .ProjectTo<StudentViewModel>(_mapper.ConfigurationProvider)
             .SingleOrDefaultAsync();
-            // return await _context.Students.Where(s => s.Id == id)
-            // .Include(s => s.User)
-            // .Select(s => new StudentViewModel
-            // {
-            //     Id = s.Id,
-            //     FirstName = s.User!.FirstName,
-            //     LastName = s.User.LastName,
-            //     Street = s.User.Street,
-            //     ZipCode = s.User.ZipCode,
-            //     City = s.User.City,
-            //     Email = s.User.Email,
-            //     PhoneNumber = s.User.PhoneNumber
-            // }).SingleOrDefaultAsync();
         }
 
         public async Task AddStudentAsync(PostStudentViewModel model)
@@ -66,33 +40,21 @@ namespace CoursesApi.Repositories
                 throw new Exception($"Email address {model.Email} is already assigned to a user.");
             }
 
-            var user = _mapper.Map<ApplicationUser>(model);
-
-            // var user = new ApplicationUser
-            // {
-            //     FirstName = model.FirstName,
-            //     LastName = model.LastName,
-            //     Street = model.Street,
-            //     ZipCode = model.ZipCode,
-            //     City = model.City,
-            //     PhoneNumber = model.PhoneNumber,
-            //     Email = model.Email,
-            //     UserName = model.Email,
-            // };
+            var userToAdd = _mapper.Map<ApplicationUser>(model);
 
             var studentToAdd = new Student
             {
-                User = user,
+                User = userToAdd,
                 EnrollmentDate = DateTime.Today
             };
 
-            var result = await _userManager.CreateAsync(user, model.Password);
+            var result = await _userManager.CreateAsync(userToAdd, model.Password);
 
             if (result.Succeeded)
             {
-                await _userManager.AddClaimsAsync(user, new List<Claim>()
+                await _userManager.AddClaimsAsync(userToAdd, new List<Claim>()
                 {
-                    new Claim(ClaimTypes.Email, user.Email!),
+                    new Claim(ClaimTypes.Email, userToAdd.Email!),
                     new Claim("Student", "true")
                 });
             }
@@ -136,15 +98,9 @@ namespace CoursesApi.Repositories
                 throw new Exception($"Could not find student with id: {id}");
             }
 
-            var person = _mapper.Map<UpdateStudentViewModel, ApplicationUser>(model, studentToUpdate.User!);
-            // var person = studentToUpdate.User;
+            var userToUpdate = _mapper.Map<UpdateStudentViewModel, ApplicationUser>(model, studentToUpdate.User!);
 
-            // person!.Street = model.Street;
-            // person.ZipCode = model.ZipCode;
-            // person.City = model.City;
-            // person.PhoneNumber = model.PhoneNumber;
-
-            _context.People.Update(person);
+            _context.People.Update(userToUpdate);
         }
 
         public async Task DeleteStudentAsync(int id)

@@ -9,7 +9,7 @@ namespace CoursesApi.Interfaces
         public Task AddCourseAsync(PostCourseViewModel model);
         public Task AddTeacherToCourseAsync(PostTeacherToCourseViewModel model);
         public Task AddStudentToCourseAsync(PostStudentCourseViewModel model);
-        public Task UpdateCourseAsync(int id, PostCourseViewModel model);
+        public Task UpdateCourseAsync(int id, UpdateCourseViewModel model);
         public Task ArchiveCourseAsync(int id);
         public Task RemoveTeacherFromCourseAsync(int courseId, int teacherId);
         public Task RemoveStudentFromCourseAsync(int courseId, int studentId);

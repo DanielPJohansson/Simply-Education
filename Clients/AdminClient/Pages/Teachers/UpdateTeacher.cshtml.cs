@@ -77,7 +77,6 @@ namespace AdminClient.Pages.Teachers
                 });
 
                 using var http = new HttpClient();
-                // var response = await http.PutAsJsonAsync(url, Teacher);
                 var requestContent = new StringContent(serializedTeacherData, Encoding.UTF8, "application/json-patch+json");
                 var response = await http.PatchAsync(url, requestContent);
 

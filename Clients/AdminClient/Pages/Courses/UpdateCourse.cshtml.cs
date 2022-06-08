@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.Json;
 using AdminClient.Services;
 using AdminClient.ViewModels;
@@ -15,7 +16,7 @@ namespace AdminClient.Pages.Courses
         [BindProperty]
         public int CourseId { get; set; }
         [BindProperty]
-        public PostCourseViewModel Course { get; set; } = new PostCourseViewModel();
+        public UpdateCourseViewModel Course { get; set; } = new UpdateCourseViewModel();
         [BindProperty]
         public List<SelectListItem> Categories { get; set; } = new List<SelectListItem>();
         [BindProperty]
@@ -39,7 +40,7 @@ namespace AdminClient.Pages.Courses
 
             if (courseToUpdate is not null)
             {
-                Course = new PostCourseViewModel
+                Course = new UpdateCourseViewModel
                 {
                     CourseCode = courseToUpdate.CourseCode,
                     Name = courseToUpdate.Name,
@@ -63,8 +64,18 @@ namespace AdminClient.Pages.Courses
             {
                 var url = $"{_baseUrl}/courses/{CourseId}";
 
+                var serializedStudentData = JsonSerializer.Serialize(new
+                {
+                    DurationInHours = Course.DurationInHours,
+                    Category = Course.Category,
+                    ImageUrl = Course.ImageUrl,
+                    Description = Course.Description,
+                    Details = Course.Details,
+                });
+
                 using var http = new HttpClient();
-                var response = await http.PutAsJsonAsync(url, Course);
+                var requestContent = new StringContent(serializedStudentData, Encoding.UTF8, "application/json-patch+json");
+                var response = await http.PatchAsync(url, requestContent);
 
                 if (response.IsSuccessStatusCode)
                 {

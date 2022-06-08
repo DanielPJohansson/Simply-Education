@@ -66,7 +66,6 @@ namespace AdminClient.Pages.Students
                 });
 
                 using var http = new HttpClient();
-                // var response = await http.PutAsJsonAsync(url, Student);
                 var requestContent = new StringContent(serializedStudentData, Encoding.UTF8, "application/json-patch+json");
                 var response = await http.PatchAsync(url, requestContent);
 

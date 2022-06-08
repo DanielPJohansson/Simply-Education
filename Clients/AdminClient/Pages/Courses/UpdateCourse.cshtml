@@ -20,13 +20,11 @@
         </div>
         <div class="form-control">
             <label asp-for="Course.CourseCode"></label>
-            <input class="form-field" asp-for="Course.CourseCode" />
-            <span asp-validation-for="Course.CourseCode" class="error-field"></span>
+            <input class="form-field disabled" asp-for="Course.CourseCode" readonly />
         </div>
         <div class="form-control">
             <label asp-for="Course.Name"></label>
-            <input class="form-field" asp-for="Course.Name" />
-            <span asp-validation-for="Course.Name" class="error-field"></span>
+            <input class="form-field disabled" asp-for="Course.Name" readonly />
         </div>
         <div class="form-control">
             <label asp-for="Course.Category"></label>

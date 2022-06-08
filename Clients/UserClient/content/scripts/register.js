@@ -37,6 +37,8 @@ async function register(event) {
   } else {
     emailError.innerHTML = "";
     passwordError.innerHTML = "";
+    firstNameError.innerHTML = "";
+    lastNameError.innerHTML = "";
 
     let errors = result.errors;
 
