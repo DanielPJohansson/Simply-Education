@@ -1,5 +1,6 @@
 using System.Text;
 using CoursesApi.Data;
+using CoursesApi.Helpers;
 using CoursesApi.Models;
 using CoursesApi.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -12,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("Sqlite")));
 
-builder.Services.AddIdentity<Person, IdentityRole>().AddEntityFrameworkStores<DataContext>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<DataContext>();
 
 builder.Services.AddAuthentication(options =>
 {
@@ -33,6 +34,7 @@ builder.Services.AddScoped<ICoursesRepository, CoursesRepository>();
 builder.Services.AddScoped<IStudentsRepository, StudentsRepository>();
 builder.Services.AddScoped<ITeachersRepository, TeachersRepository>();
 
+builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

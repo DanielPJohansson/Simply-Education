@@ -7,10 +7,10 @@ namespace CoursesApi.Models
         public int Id { get; set; }
         [DataType(DataType.Date)]
         public DateTime EnrollmentDate { get; set; }
-        public string? PersonId { get; set; }
-        [ForeignKey("PersonId ")]
+        public string? UserId { get; set; }
+        [ForeignKey("UserId")]
         [Required]
-        public Person? Person { get; set; }
+        public ApplicationUser? User { get; set; }
         public ICollection<StudentInCourse> Courses { get; set; } = new List<StudentInCourse>();
     }
 }

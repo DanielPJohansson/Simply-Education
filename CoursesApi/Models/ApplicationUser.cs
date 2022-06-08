@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CoursesApi.Models
 {
-    public class Person : IdentityUser
+    public class ApplicationUser : IdentityUser
     {
         // public int Id { get; set; }
         public string? FirstName { get; set; }

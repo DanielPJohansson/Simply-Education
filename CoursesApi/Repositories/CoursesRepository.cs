@@ -66,10 +66,10 @@ namespace CoursesApi.Repositories
         {
             return await _context.Courses.Where(c => c.Id == courseId)
             .Include(c => c.Teachers)
-            .ThenInclude(t => t.Person)
+            .ThenInclude(t => t.User)
             .Include(c => c.StudentCourses)
             .ThenInclude(sc => sc.Student)
-            .ThenInclude(s => s!.Person)
+            .ThenInclude(s => s!.User)
             .Select(c => new CourseWithStudentsAndTeachersViewModel
             {
                 CourseId = c.Id,
@@ -78,16 +78,16 @@ namespace CoursesApi.Repositories
                 .Select(sc => new StudentViewModel
                 {
                     Id = sc.Student!.Id,
-                    FirstName = sc.Student.Person!.FirstName,
-                    LastName = sc.Student.Person.LastName,
-                    Email = sc.Student.Person.Email
+                    FirstName = sc.Student.User!.FirstName,
+                    LastName = sc.Student.User.LastName,
+                    Email = sc.Student.User.Email
                 }).ToList(),
                 Teachers = c.Teachers.Select(t => new TeacherViewModel
                 {
                     Id = t.Id,
-                    FirstName = t.Person!.FirstName,
-                    LastName = t.Person.LastName,
-                    Email = t.Person.Email
+                    FirstName = t.User!.FirstName,
+                    LastName = t.User.LastName,
+                    Email = t.User.Email
                 }).ToList()
             }).SingleOrDefaultAsync();
         }

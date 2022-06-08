@@ -14,7 +14,7 @@ const baseUrl = "https://localhost:7210/api/v1";
 
 async function register(event) {
   event.preventDefault();
-  let url = `${baseUrl}/authentication/register`;
+  let url = `${baseUrl}/authentication/register/student`;
 
   let user = {
     email: emailInput.value,

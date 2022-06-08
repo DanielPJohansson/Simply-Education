@@ -179,14 +179,14 @@ namespace CoursesApi.Data.migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     EnrollmentDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    PersonId = table.Column<string>(type: "TEXT", nullable: false)
+                    UserId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Students", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Students_AspNetUsers_PersonId",
-                        column: x => x.PersonId,
+                        name: "FK_Students_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -198,14 +198,14 @@ namespace CoursesApi.Data.migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    PersonId = table.Column<string>(type: "TEXT", nullable: false)
+                    UserId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Teachers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Teachers_AspNetUsers_PersonId",
-                        column: x => x.PersonId,
+                        name: "FK_Teachers_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -375,14 +375,14 @@ namespace CoursesApi.Data.migrations
                 column: "StudentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Students_PersonId",
+                name: "IX_Students_UserId",
                 table: "Students",
-                column: "PersonId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teachers_PersonId",
+                name: "IX_Teachers_UserId",
                 table: "Teachers",
-                column: "PersonId");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

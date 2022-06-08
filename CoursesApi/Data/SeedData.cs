@@ -28,7 +28,7 @@ namespace CoursesApi.Data
 
             foreach (var student in students!)
             {
-                var person = new Person
+                var person = new ApplicationUser
                 {
                     FirstName = student.FirstName,
                     LastName = student.LastName,
@@ -40,7 +40,7 @@ namespace CoursesApi.Data
                 };
                 var newStudent = new Student
                 {
-                    Person = person
+                    User = person
                 };
 
                 context.Students.Add(newStudent);
@@ -71,7 +71,7 @@ namespace CoursesApi.Data
                     }
                     competences.Add(category);
                 }
-                var person = new Person
+                var person = new ApplicationUser
                 {
                     FirstName = teacher.FirstName,
                     LastName = teacher.LastName,
@@ -83,7 +83,7 @@ namespace CoursesApi.Data
                 };
                 var newTeacher = new Teacher
                 {
-                    Person = person,
+                    User = person,
                     Competences = competences
                 };
 

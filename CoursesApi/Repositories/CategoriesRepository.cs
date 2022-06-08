@@ -42,7 +42,7 @@ namespace CoursesApi.Repositories
         {
             var courses = await _context.Categories.Where(cat => cat.Id == id)
             .Include(cat => cat.Teachers)
-            .ThenInclude(t => t.Person)
+            .ThenInclude(t => t.User)
             .Select(cat => new CategoryWithTeachersViewModel
             {
                 CategoryId = cat.Id,
@@ -50,10 +50,10 @@ namespace CoursesApi.Repositories
                 Teachers = cat.Teachers.Select(t => new TeacherViewModel
                 {
                     Id = t.Id,
-                    FirstName = t.Person!.FirstName,
-                    LastName = t.Person.LastName,
-                    Email = t.Person.Email,
-                    PhoneNumber = t.Person.PhoneNumber
+                    FirstName = t.User!.FirstName,
+                    LastName = t.User.LastName,
+                    Email = t.User.Email,
+                    PhoneNumber = t.User.PhoneNumber
                 }).ToList()
             }).SingleOrDefaultAsync();
             return courses;

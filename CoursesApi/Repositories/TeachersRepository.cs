@@ -9,8 +9,8 @@ namespace CoursesApi.Repositories
     public class TeachersRepository : ITeachersRepository
     {
         private readonly DataContext _context;
-        private readonly UserManager<Person> _userManager;
-        public TeachersRepository(DataContext context, UserManager<Person> userManager)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public TeachersRepository(DataContext context, UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
             _context = context;
@@ -19,17 +19,17 @@ namespace CoursesApi.Repositories
         public async Task<IEnumerable<TeacherViewModel>> GetTeachersAsync()
         {
             return await _context.Teachers
-            .Include(t => t.Person)
+            .Include(t => t.User)
             .Select(t => new TeacherViewModel
             {
                 Id = t.Id,
-                FirstName = t.Person!.FirstName,
-                LastName = t.Person.LastName,
-                Street = t.Person.Street,
-                ZipCode = t.Person.ZipCode,
-                City = t.Person.City,
-                Email = t.Person.Email,
-                PhoneNumber = t.Person.PhoneNumber,
+                FirstName = t.User!.FirstName,
+                LastName = t.User.LastName,
+                Street = t.User.Street,
+                ZipCode = t.User.ZipCode,
+                City = t.User.City,
+                Email = t.User.Email,
+                PhoneNumber = t.User.PhoneNumber,
                 Competences = t.Competences.Select(c => c.Name).ToList()
             }).ToListAsync();
         }
@@ -37,19 +37,19 @@ namespace CoursesApi.Repositories
         public async Task<IEnumerable<TeacherViewModel>?> GetTeachersAsync(string categoryName)
         {
             var teachers = await _context.Teachers
-            .Include(t => t.Person)
+            .Include(t => t.User)
             .Include(t => t.Competences)
             .Where(t => t.Competences.Any(c => c.Name.ToLower().Contains(categoryName.ToLower())))
             .Select(t => new TeacherViewModel
             {
                 Id = t.Id,
-                FirstName = t.Person!.FirstName,
-                LastName = t.Person.LastName,
-                Street = t.Person.Street,
-                ZipCode = t.Person.ZipCode,
-                City = t.Person.City,
-                Email = t.Person.Email,
-                PhoneNumber = t.Person.PhoneNumber
+                FirstName = t.User!.FirstName,
+                LastName = t.User.LastName,
+                Street = t.User.Street,
+                ZipCode = t.User.ZipCode,
+                City = t.User.City,
+                Email = t.User.Email,
+                PhoneNumber = t.User.PhoneNumber
             })
             .ToListAsync();
 
@@ -59,18 +59,18 @@ namespace CoursesApi.Repositories
         public async Task<TeacherViewModel?> GetTeacherAsync(int id)
         {
             return await _context.Teachers.Where(t => t.Id == id)
-            .Include(t => t.Person)
+            .Include(t => t.User)
             .Include(t => t.Competences)
             .Select(t => new TeacherViewModel
             {
                 Id = t.Id,
-                FirstName = t.Person!.FirstName,
-                LastName = t.Person.LastName,
-                Street = t.Person.Street,
-                ZipCode = t.Person.ZipCode,
-                City = t.Person.City,
-                Email = t.Person.Email,
-                PhoneNumber = t.Person.PhoneNumber,
+                FirstName = t.User!.FirstName,
+                LastName = t.User.LastName,
+                Street = t.User.Street,
+                ZipCode = t.User.ZipCode,
+                City = t.User.City,
+                Email = t.User.Email,
+                PhoneNumber = t.User.PhoneNumber,
                 Competences = t.Competences.Select(c => c.Name).ToList()
             }).SingleOrDefaultAsync();
         }
@@ -79,10 +79,6 @@ namespace CoursesApi.Repositories
 
         public async Task AddTeacherAsync(PostTeacherViewModel model)
         {
-            if (await _context.Teachers.Include(t => t.Person).AnyAsync(t => t.Person.Email == model.Email))
-            {
-                throw new Exception($"A teacher with email address {model.Email} already exists.");
-            }
             if (await _userManager.FindByEmailAsync(model.Email) is not null)
             {
                 throw new Exception($"Email address {model.Email} is already assigned to a user.");
@@ -102,7 +98,7 @@ namespace CoursesApi.Repositories
                 competences.Add(category);
             }
 
-            var person = new Person
+            var user = new ApplicationUser
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
@@ -116,17 +112,17 @@ namespace CoursesApi.Repositories
 
             var teacherToAdd = new Teacher
             {
-                Person = person,
+                User = user,
                 Competences = competences
             };
 
-            var result = await _userManager.CreateAsync(person, model.Password);
+            var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
-                await _userManager.AddClaimsAsync(person, new List<Claim>()
+                await _userManager.AddClaimsAsync(user, new List<Claim>()
                 {
-                    new Claim(ClaimTypes.Email, person.Email!),
+                    new Claim(ClaimTypes.Email, user.Email!),
                     new Claim("Teacher", "true")
                 });
 
@@ -148,7 +144,7 @@ namespace CoursesApi.Repositories
         public async Task UpdateTeacherAsync(int id, UpdateTeacherViewModel model)
         {
             var teacherToUpdate = _context.Teachers
-            .Include(s => s.Person)
+            .Include(s => s.User)
             .Include(t => t.Competences)
             .SingleOrDefault(t => t.Id == id);
 
@@ -171,29 +167,29 @@ namespace CoursesApi.Repositories
                 competences.Add(category);
             }
 
-            var person = teacherToUpdate.Person;
+            var user = teacherToUpdate.User;
 
-            person!.Street = model.Street;
-            person.ZipCode = model.ZipCode;
-            person.City = model.City;
-            person.PhoneNumber = model.PhoneNumber;
+            user!.Street = model.Street;
+            user.ZipCode = model.ZipCode;
+            user.City = model.City;
+            user.PhoneNumber = model.PhoneNumber;
 
             teacherToUpdate.Competences = competences;
 
-            _context.People.Update(person);
+            _context.People.Update(user);
             _context.Teachers.Update(teacherToUpdate);
         }
 
         public async Task DeleteTeacherAsync(int id)
         {
-            var teacherToDelete = await _context.Teachers.Include(s => s.Person).SingleOrDefaultAsync(t => t.Id == id);
+            var teacherToDelete = await _context.Teachers.Include(s => s.User).SingleOrDefaultAsync(t => t.Id == id);
             if (teacherToDelete is null)
             {
                 throw new Exception($"Could not find teacher with id: {id}");
             }
 
             _context.Teachers.Remove(teacherToDelete);
-            _context.People.Remove(teacherToDelete.Person!);
+            _context.People.Remove(teacherToDelete.User!);
         }
 
         public async Task<bool> SaveChangesAsync()
