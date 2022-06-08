@@ -5,8 +5,8 @@ namespace CoursesApi.Repositories
 {
     public class CategoriesRepository : ICategoriesRepository
     {
-        private readonly CoursesContext _context;
-        public CategoriesRepository(CoursesContext context)
+        private readonly DataContext _context;
+        public CategoriesRepository(DataContext context)
         {
             _context = context;
         }
@@ -40,17 +40,20 @@ namespace CoursesApi.Repositories
 
         public async Task<CategoryWithTeachersViewModel?> GetTeachersInCategoryAsync(int id)
         {
-            var courses = await _context.Categories.Where(cat => cat.Id == id).Include(cat => cat.Teachers).Select(cat => new CategoryWithTeachersViewModel
+            var courses = await _context.Categories.Where(cat => cat.Id == id)
+            .Include(cat => cat.Teachers)
+            .ThenInclude(t => t.Person)
+            .Select(cat => new CategoryWithTeachersViewModel
             {
                 CategoryId = cat.Id,
                 CategoryName = cat.Name,
                 Teachers = cat.Teachers.Select(t => new TeacherViewModel
                 {
                     Id = t.Id,
-                    FirstName = t.FirstName,
-                    LastName = t.LastName,
-                    Email = t.Email,
-                    PhoneNumber = t.PhoneNumber
+                    FirstName = t.Person!.FirstName,
+                    LastName = t.Person.LastName,
+                    Email = t.Person.Email,
+                    PhoneNumber = t.Person.PhoneNumber
                 }).ToList()
             }).SingleOrDefaultAsync();
             return courses;

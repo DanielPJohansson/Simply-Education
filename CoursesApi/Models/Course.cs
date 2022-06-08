@@ -18,7 +18,7 @@ namespace CoursesApi.Models
         public string? Details { get; set; }
 
         public ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
-        public ICollection<CourseStudent> StudentCourses { get; set; } = new List<CourseStudent>();
+        public ICollection<StudentInCourse> StudentCourses { get; set; } = new List<StudentInCourse>();
         public bool IsDeprecated { get; set; } = false;
     }
 }

@@ -1,35 +1,49 @@
 #course-image {
-    width: 500px;
-    max-width: 90%;
+  width: 500px;
+  max-width: 90%;
 }
 
 .course-table {
-    font-size: 1.2rem;
-
+  font-size: 1.2rem;
 }
 
-.course-table th{
-    text-align: left;
-    font-size: 1.2rem;
-    padding: 0.5rem 2rem 0 0;
+.course-table th {
+  text-align: left;
+  font-size: 1.2rem;
+  padding: 0.5rem 2rem 0 0;
 }
 
-.course-overview-wrapper {
-    margin: 0rem 1rem;
-    max-width: 1000px;
-    background-color: white;
+.course-overview {
+  margin: 2rem 1rem;
+  max-width: 1000px;
+  background-color: white;
 }
 .course-details {
-    margin: 2rem 1rem;
-    max-width: 1000px;
+  margin: 2rem 1rem;
 }
-.course-details h2, h3{
-    margin: 1rem 0 0.5rem 0;
+.course-details ul {
+  margin: 2rem 1rem;
+}
+.details-container h2,
+h3 {
+  margin: 1rem 0 0.5rem 0;
 }
 
-.course-details  p{
-    margin-bottom: 1rem;
+.details-container p {
+  margin-bottom: 1rem;
 }
-.course-details ul{
-    margin: 1rem 2rem;
+.details-container table {
+  margin: 1rem 0;
+  background-color: rgb(219, 219, 219);
+  color: #333;
+  padding: 0.5rem;
+  border: rgb(122, 122, 122) 2px solid;
+  border-radius: 5px;
+}
+
+.details-container {
+  margin: 0rem 1rem;
+  max-width: 1000px;
+  background-color: white;
+  border-radius: 5px;
 }

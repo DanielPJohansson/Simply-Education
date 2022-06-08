@@ -67,18 +67,14 @@ namespace CoursesApi.Controllers
 
                 return StatusCode(500, "Could not save changes when adding teacher.");
             }
-            catch (BadHttpRequestException ex)
-            {
-                return StatusCode(ex.StatusCode, ex.Message);
-            }
             catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateTeacher(int id, PostTeacherViewModel model)
+        [HttpPatch("{id}")]
+        public async Task<ActionResult> UpdateTeacher(int id, UpdateTeacherViewModel model)
         {
             try
             {

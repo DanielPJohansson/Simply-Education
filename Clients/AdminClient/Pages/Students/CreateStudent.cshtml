@@ -41,14 +41,19 @@
             <span asp-validation-for="Student.City" class="error-field"></span>
         </div>
         <div class="form-control">
+            <label asp-for="Student.PhoneNumber"></label>
+            <input class="form-field" asp-for="Student.PhoneNumber" />
+            <span asp-validation-for="Student.PhoneNumber" class="error-field"></span>
+        </div>
+        <div class="form-control">
             <label asp-for="Student.Email"></label>
             <input class="form-field" asp-for="Student.Email" />
             <span asp-validation-for="Student.Email" class="error-field"></span>
         </div>
         <div class="form-control">
-            <label asp-for="Student.PhoneNumber"></label>
-            <input class="form-field" asp-for="Student.PhoneNumber" />
-            <span asp-validation-for="Student.PhoneNumber" class="error-field"></span>
+            <label asp-for="Student.Password"></label>
+            <input class="form-field" asp-for="Student.Password" />
+            <span asp-validation-for="Student.Password" class="error-field"></span>
         </div>
 
         <button type="submit" class="button">Spara</button>

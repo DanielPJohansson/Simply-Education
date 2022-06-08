@@ -41,11 +41,6 @@
             <span asp-validation-for="Teacher.City" class="error-field"></span>
         </div>
         <div class="form-control">
-            <label asp-for="Teacher.Email"></label>
-            <input class="form-field" asp-for="Teacher.Email" />
-            <span asp-validation-for="Teacher.Email" class="error-field"></span>
-        </div>
-        <div class="form-control">
             <label asp-for="Teacher.PhoneNumber"></label>
             <input class="form-field" asp-for="Teacher.PhoneNumber" />
             <span asp-validation-for="Teacher.PhoneNumber" class="error-field"></span>
@@ -54,6 +49,16 @@
             <label asp-for="Teacher.Competences"></label>
             <select class="form-field" asp-for="Teacher.Competences" asp-items="Model.Categories"></select>
             <span asp-validation-for="Teacher.Competences" class="error-field"></span>
+        </div>
+        <div class="form-control">
+            <label asp-for="Teacher.Email"></label>
+            <input class="form-field" asp-for="Teacher.Email" />
+            <span asp-validation-for="Teacher.Email" class="error-field"></span>
+        </div>
+        <div class="form-control">
+            <label asp-for="Teacher.Password"></label>
+            <input class="form-field" asp-for="Teacher.Password" />
+            <span asp-validation-for="Teacher.Password" class="error-field"></span>
         </div>
 
         <button type="submit" class="button">Spara</button>

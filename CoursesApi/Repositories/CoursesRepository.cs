@@ -5,8 +5,8 @@ namespace CoursesApi.Repositories
 {
     public class CoursesRepository : ICoursesRepository
     {
-        private readonly CoursesContext _context;
-        public CoursesRepository(CoursesContext context)
+        private readonly DataContext _context;
+        public CoursesRepository(DataContext context)
         {
             _context = context;
         }
@@ -66,8 +66,10 @@ namespace CoursesApi.Repositories
         {
             return await _context.Courses.Where(c => c.Id == courseId)
             .Include(c => c.Teachers)
+            .ThenInclude(t => t.Person)
             .Include(c => c.StudentCourses)
             .ThenInclude(sc => sc.Student)
+            .ThenInclude(s => s!.Person)
             .Select(c => new CourseWithStudentsAndTeachersViewModel
             {
                 CourseId = c.Id,
@@ -76,16 +78,16 @@ namespace CoursesApi.Repositories
                 .Select(sc => new StudentViewModel
                 {
                     Id = sc.Student!.Id,
-                    FirstName = sc.Student.FirstName,
-                    LastName = sc.Student.LastName,
-                    Email = sc.Student.Email
+                    FirstName = sc.Student.Person!.FirstName,
+                    LastName = sc.Student.Person.LastName,
+                    Email = sc.Student.Person.Email
                 }).ToList(),
                 Teachers = c.Teachers.Select(t => new TeacherViewModel
                 {
                     Id = t.Id,
-                    FirstName = t.FirstName,
-                    LastName = t.LastName,
-                    Email = t.Email
+                    FirstName = t.Person!.FirstName,
+                    LastName = t.Person.LastName,
+                    Email = t.Person.Email
                 }).ToList()
             }).SingleOrDefaultAsync();
         }
@@ -160,7 +162,7 @@ namespace CoursesApi.Repositories
                 throw new BadHttpRequestException($"Student with id {model.StudentId} is already assigned to course with Id: {model.CourseId}.", 400);
             }
 
-            var studentCourse = new CourseStudent
+            var studentCourse = new StudentInCourse
             {
                 Student = student,
                 Course = course,

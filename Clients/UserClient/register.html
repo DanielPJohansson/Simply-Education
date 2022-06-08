@@ -21,13 +21,23 @@
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="courses.html">Our courses</a></li>
-        <li><a id="login" href="register.html">Login</a></li>
+        <li><a id="login" href="register.html">Register</a></li>
       </ul>
     </nav>
     <main>
       <section class="form-wrapper">
           <h2 class="form-header">Register</h2>
         <form class="form" method="post" id="register-form">
+          <div class="form-control">
+              <label for="firstName">First name</label>
+              <input class="form-field" name="firstName" id="first-name"></input>
+              <div class="error-field" id="first-name-error"></div>
+          </div>
+          <div class="form-control">
+              <label for="lastName">Last name</label>
+              <input class="form-field" name="lastName" id="last-name"></input>
+              <div class="error-field" id="last-name-error"></div>
+          </div>
             <div class="form-control">
                 <label for="email">Email address</label>
                 <input class="form-field" name="email" id="email" placeholder="email@example.com"></input>
@@ -38,18 +48,6 @@
                 <input class="form-field" name="password" type="password" id="password"></input>
                 <div class="error-field" id="password-error"></div>
             </div>
-            <!-- <div class="form-control">
-                <label for="firstName">First name</label>
-                <input class="form-field" name="firstName" id="first-name"></input>
-            </div>
-            <div class="form-control">
-                <label for="lastName">Last name</label>
-                <input class="form-field" name="lastName" id="last-name"></input>
-            </div>
-            <div class="form-control">
-                <label for="phoneNumber">Phone number</label>
-                <input class="form-field" name="phoneNumber" id="phone-number"></input>
-            </div> -->
           <button class="button" type="submit">Register</button>
         </form>
       </section>

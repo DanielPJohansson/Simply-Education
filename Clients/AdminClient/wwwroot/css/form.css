@@ -28,9 +28,10 @@
 
 .form-field {
   font-size: 1.2rem;
-  background-color: rgb(177, 177, 177);
+  background-color: rgb(219, 219, 219);
   color: #333;
   padding: 0.5rem;
+  border: rgb(122, 122, 122) 2px solid;
   border-radius: 5px;
 }
 
@@ -72,4 +73,10 @@
 
 .hide {
   display: none;
+}
+
+.disabled {
+  background-color: rgb(160, 160, 160);
+  border: none;
+  color: rgb(63, 63, 63);
 }

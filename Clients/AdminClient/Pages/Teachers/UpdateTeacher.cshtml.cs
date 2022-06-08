@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using AdminClient.Services;
+using System.Text;
 
 namespace AdminClient.Pages.Teachers
 {
@@ -15,7 +16,7 @@ namespace AdminClient.Pages.Teachers
         [BindProperty]
         public int TeacherId { get; set; }
         [BindProperty]
-        public PostTeacherViewModel Teacher { get; set; } = new PostTeacherViewModel();
+        public UpdateTeacherViewModel Teacher { get; set; } = new UpdateTeacherViewModel();
         [BindProperty]
         public List<SelectListItem> Categories { get; set; } = new List<SelectListItem>();
         [BindProperty]
@@ -41,7 +42,7 @@ namespace AdminClient.Pages.Teachers
 
             if (teacherToUpdate is not null)
             {
-                Teacher = new PostTeacherViewModel
+                Teacher = new UpdateTeacherViewModel
                 {
                     FirstName = teacherToUpdate.FirstName,
                     LastName = teacherToUpdate.LastName,
@@ -66,8 +67,19 @@ namespace AdminClient.Pages.Teachers
             {
                 var url = $"{_baseUrl}/teachers/{TeacherId}";
 
+                var serializedTeacherData = JsonSerializer.Serialize(new
+                {
+                    Street = Teacher.Street,
+                    ZipCode = Teacher.ZipCode,
+                    City = Teacher.City,
+                    PhoneNumber = Teacher.PhoneNumber,
+                    Competences = Teacher.Competences
+                });
+
                 using var http = new HttpClient();
-                var response = await http.PutAsJsonAsync(url, Teacher);
+                // var response = await http.PutAsJsonAsync(url, Teacher);
+                var requestContent = new StringContent(serializedTeacherData, Encoding.UTF8, "application/json-patch+json");
+                var response = await http.PatchAsync(url, requestContent);
 
                 if (response.IsSuccessStatusCode)
                 {

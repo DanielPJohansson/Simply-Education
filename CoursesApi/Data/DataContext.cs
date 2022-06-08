@@ -3,15 +3,16 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace CoursesApi.Data
 {
-    public class CoursesContext : IdentityDbContext
+    public class DataContext : IdentityDbContext<Person>
     {
         public DbSet<Course> Courses => Set<Course>();
         public DbSet<Category> Categories => Set<Category>();
-        public DbSet<CourseStudent> StudentCourses => Set<CourseStudent>();
+        public DbSet<StudentInCourse> StudentCourses => Set<StudentInCourse>();
         public DbSet<Student> Students => Set<Student>();
         public DbSet<Teacher> Teachers => Set<Teacher>();
+        public DbSet<Person> People => Set<Person>();
         // public DbSet<StudentCourse> StudentCourses => Set<StudentCourse>();
-        public CoursesContext(DbContextOptions options) : base(options)
+        public DataContext(DbContextOptions options) : base(options)
         {
 
         }

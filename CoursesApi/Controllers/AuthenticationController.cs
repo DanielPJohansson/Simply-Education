@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using CoursesApi.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -11,10 +12,10 @@ namespace CoursesApi.Controllers
     [Route("api/v1/authentication")]
     public class AuthenticationController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<Person> _userManager;
+        private readonly SignInManager<Person> _signInManager;
         private readonly IConfiguration _config;
-        public AuthenticationController(IConfiguration config, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AuthenticationController(IConfiguration config, UserManager<Person> userManager, SignInManager<Person> signInManager)
         {
             _config = config;
             _signInManager = signInManager;
@@ -24,10 +25,12 @@ namespace CoursesApi.Controllers
         [HttpPost("register")]
         public async Task<ActionResult> RegisterUser(RegisterUserViewModel model)
         {
-            var user = new IdentityUser
+            var user = new Person
             {
                 UserName = model.Email,
-                Email = model.Email
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -94,7 +97,7 @@ namespace CoursesApi.Controllers
             }
         }
 
-        private async Task<string> CreateJwt(IdentityUser user)
+        private async Task<string> CreateJwt(Person user)
         {
             var key = Encoding.ASCII.GetBytes(_config.GetValue<string>("apiKey"));
             var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature);

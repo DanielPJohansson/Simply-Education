@@ -21,7 +21,7 @@
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="courses.html">Our courses</a></li>
-        <li><a id="login" href="register.html">Login</a></li>
+        <li><a id="login" href="register.html">Register</a></li>
       </ul>
     </nav>
     <main>
@@ -29,31 +29,32 @@
         <img id="course-image" src="" alt="course image" />
         <h1 id="course-name" class="page-title">Introduction to C#</h1>
       </header>
-
-      <section class="course-overview-wrapper">
-        <div class="course-description">
-          <h2>Description</h2>
-          <p id="course-description"></p>
-        </div>
-        <table class="course-table">
-          <tr>
-            <th>Course code</th>
-            <td id="course-code"></td>
-          </tr>
-          <tr>
-            <th>Course duration</th>
-            <td id="course-duration"></td>
-          </tr>
-          <tr>
-            <th>Category</th>
-            <td id="course-category"></td>
-          </tr>
-        </table>
-      </section>
-      <section class="course-details">
-        <h2>Details</h2>
-        <div id="course-details"></div>
-      </section>
+      <div class="details-container">
+        <section class="course-overview">
+          <div class="course-description">
+            <h2>Description</h2>
+            <p id="course-description"></p>
+          </div>
+          <table class="course-table">
+            <tr>
+              <th>Course code</th>
+              <td id="course-code"></td>
+            </tr>
+            <tr>
+              <th>Course duration</th>
+              <td id="course-duration"></td>
+            </tr>
+            <tr>
+              <th>Category</th>
+              <td id="course-category"></td>
+            </tr>
+          </table>
+        </section>
+        <section class="course-details">
+          <h2>Details</h2>
+          <div id="course-details"></div>
+        </section>
+      </div>
     </main>
 
     <script src="./content/scripts/details.js"></script>

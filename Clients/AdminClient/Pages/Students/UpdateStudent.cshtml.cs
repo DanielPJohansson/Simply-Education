@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.Json;
 using AdminClient.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +14,7 @@ namespace AdminClient.Pages.Students
         [BindProperty]
         public int StudentId { get; set; }
         [BindProperty]
-        public PostStudentViewModel Student { get; set; } = new PostStudentViewModel();
-        [BindProperty]
+        public UpdateStudentViewModel Student { get; set; } = new UpdateStudentViewModel();
         public StatusMessage StatusMessage { get; set; } = new StatusMessage();
 
         public UpdateStudent(IConfiguration config)
@@ -36,7 +36,7 @@ namespace AdminClient.Pages.Students
 
             if (studentToUpdate is not null)
             {
-                Student = new PostStudentViewModel
+                Student = new UpdateStudentViewModel
                 {
                     FirstName = studentToUpdate.FirstName,
                     LastName = studentToUpdate.LastName,
@@ -44,7 +44,7 @@ namespace AdminClient.Pages.Students
                     ZipCode = studentToUpdate.ZipCode,
                     City = studentToUpdate.City,
                     Email = studentToUpdate.Email,
-                    PhoneNumber = studentToUpdate.PhoneNumber,
+                    PhoneNumber = studentToUpdate.PhoneNumber
                 };
             }
 
@@ -57,8 +57,18 @@ namespace AdminClient.Pages.Students
             {
                 var url = $"{_baseUrl}/students/{StudentId}";
 
+                var serializedStudentData = JsonSerializer.Serialize(new
+                {
+                    Street = Student.Street,
+                    ZipCode = Student.ZipCode,
+                    City = Student.City,
+                    PhoneNumber = Student.PhoneNumber
+                });
+
                 using var http = new HttpClient();
-                var response = await http.PutAsJsonAsync(url, Student);
+                // var response = await http.PutAsJsonAsync(url, Student);
+                var requestContent = new StringContent(serializedStudentData, Encoding.UTF8, "application/json-patch+json");
+                var response = await http.PatchAsync(url, requestContent);
 
                 if (response.IsSuccessStatusCode)
                 {

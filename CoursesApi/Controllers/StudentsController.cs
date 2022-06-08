@@ -58,8 +58,8 @@ namespace CoursesApi.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateStudent(int id, PostStudentViewModel model)
+        [HttpPatch("{id}")]
+        public async Task<ActionResult> UpdateStudent(int id, UpdateStudentViewModel model)
         {
             try
             {

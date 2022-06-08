@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoursesApi.Models
 {
-    public class CourseStudent
+    public class StudentInCourse
     {
         public int Id { get; set; }
         public int CourseId { get; set; }

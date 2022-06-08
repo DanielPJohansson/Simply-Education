@@ -1,5 +1,6 @@
 using System.Text;
 using CoursesApi.Data;
+using CoursesApi.Models;
 using CoursesApi.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -9,9 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddDbContext<CoursesContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("Sqlite")));
+builder.Services.AddDbContext<DataContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("Sqlite")));
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<CoursesContext>();
+builder.Services.AddIdentity<Person, IdentityRole>().AddEntityFrameworkStores<DataContext>();
 
 builder.Services.AddAuthentication(options =>
 {

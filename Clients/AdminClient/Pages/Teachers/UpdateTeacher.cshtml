@@ -20,13 +20,18 @@
         </div>
         <div class="form-control">
             <label asp-for="Teacher.FirstName"></label>
-            <input class="form-field" asp-for="Teacher.FirstName" />
+            <input class="form-field  disabled" asp-for="Teacher.FirstName" readonly />
             <span asp-validation-for="Teacher.FirstName" class="error-field"></span>
         </div>
         <div class="form-control">
             <label asp-for="Teacher.LastName"></label>
-            <input class="form-field" asp-for="Teacher.LastName" />
+            <input class="form-field  disabled" asp-for="Teacher.LastName" readonly />
             <span asp-validation-for="Teacher.LastName" class="error-field"></span>
+        </div>
+        <div class="form-control">
+            <label asp-for="Teacher.Email"></label>
+            <input class="form-field  disabled" asp-for="Teacher.Email" readonly />
+            <span asp-validation-for="Teacher.Email" class="error-field"></span>
         </div>
         <div class="form-control">
             <label asp-for="Teacher.Street"></label>
@@ -42,11 +47,6 @@
             <label asp-for="Teacher.City"></label>
             <input class="form-field" asp-for="Teacher.City" />
             <span asp-validation-for="Teacher.City" class="error-field"></span>
-        </div>
-        <div class="form-control">
-            <label asp-for="Teacher.Email"></label>
-            <input class="form-field" asp-for="Teacher.Email" />
-            <span asp-validation-for="Teacher.Email" class="error-field"></span>
         </div>
         <div class="form-control">
             <label asp-for="Teacher.PhoneNumber"></label>

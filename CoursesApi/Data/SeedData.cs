@@ -7,7 +7,7 @@ namespace CoursesApi.Data
     {
         public static async Task InitializeAsync(IServiceProvider serviceProvider)
         {
-            using var context = new CoursesContext(serviceProvider.GetRequiredService<DbContextOptions<CoursesContext>>());
+            using var context = new DataContext(serviceProvider.GetRequiredService<DbContextOptions<DataContext>>());
             await context.Database.MigrateAsync();
             await SeedStudents(context);
             await SeedCategories(context);
@@ -16,7 +16,7 @@ namespace CoursesApi.Data
 
         }
 
-        public static async Task SeedStudents(CoursesContext context)
+        public static async Task SeedStudents(DataContext context)
         {
             if (await context.Students.AnyAsync())
             {
@@ -28,7 +28,7 @@ namespace CoursesApi.Data
 
             foreach (var student in students!)
             {
-                var newStudent = new Student
+                var person = new Person
                 {
                     FirstName = student.FirstName,
                     LastName = student.LastName,
@@ -36,7 +36,11 @@ namespace CoursesApi.Data
                     ZipCode = student.ZipCode,
                     City = student.City,
                     Email = student.Email,
-                    PhoneNumber = student.PhoneNumber,
+                    PhoneNumber = student.PhoneNumber
+                };
+                var newStudent = new Student
+                {
+                    Person = person
                 };
 
                 context.Students.Add(newStudent);
@@ -45,7 +49,7 @@ namespace CoursesApi.Data
             await context.SaveChangesAsync();
         }
 
-        public static async Task SeedTeachers(CoursesContext context)
+        public static async Task SeedTeachers(DataContext context)
         {
             if (await context.Teachers.AnyAsync())
             {
@@ -67,8 +71,7 @@ namespace CoursesApi.Data
                     }
                     competences.Add(category);
                 }
-
-                var newTeacher = new Teacher
+                var person = new Person
                 {
                     FirstName = teacher.FirstName,
                     LastName = teacher.LastName,
@@ -76,7 +79,11 @@ namespace CoursesApi.Data
                     ZipCode = teacher.ZipCode,
                     City = teacher.City,
                     Email = teacher.Email,
-                    PhoneNumber = teacher.PhoneNumber,
+                    PhoneNumber = teacher.PhoneNumber
+                };
+                var newTeacher = new Teacher
+                {
+                    Person = person,
                     Competences = competences
                 };
 
@@ -86,7 +93,7 @@ namespace CoursesApi.Data
             await context.SaveChangesAsync();
         }
 
-        public static async Task SeedCategories(CoursesContext context)
+        public static async Task SeedCategories(DataContext context)
         {
             if (await context.Categories.AnyAsync())
             {
@@ -99,7 +106,7 @@ namespace CoursesApi.Data
             await context.AddRangeAsync(categories!);
             await context.SaveChangesAsync();
         }
-        public static async Task SeedCourses(CoursesContext context)
+        public static async Task SeedCourses(DataContext context)
         {
             if (await context.Courses.AnyAsync())
             {
